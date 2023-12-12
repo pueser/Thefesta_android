@@ -1,6 +1,7 @@
 
 package com.example.thefesta
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.thefesta.bottomnavi.Board
@@ -18,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         PermissionUtil(this).checkPermissions()
+
+        //AdminAcitity 넘어가는 버튼(Main activtiy에 admin_btn 추가)
+        val intent = Intent(this, AdminActivity::class.java)
+        binding.adminbutton.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AdminActivity::class.java))
+        }
+
 
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {
@@ -53,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     return@setOnItemSelectedListener  true
                 }
+
             }
             return@setOnItemSelectedListener false
         }

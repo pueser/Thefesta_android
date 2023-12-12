@@ -3,16 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottomnavi.User">
+    tools:context=".adminbottomnavi.AdminLogout">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="회원 화면"
+        android:text="로그아웃"
         android:textSize="30sp"/>
-
-
 
 </FrameLayout>
