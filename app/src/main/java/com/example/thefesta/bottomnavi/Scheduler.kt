@@ -1,11 +1,20 @@
 package com.example.thefesta.bottomnavi
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ConsoleMessage
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import com.example.thefesta.R
+import okhttp3.Cookie
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +43,68 @@ class Scheduler : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scheduler, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_scheduler, container, false);
+
+        val webView: WebView = view.findViewById<WebView>(R.id.webView)
+
+        webView.settings.run {
+            javaScriptEnabled = true;
+            javaScriptCanOpenWindowsAutomatically = true;
+        }
+
+        //브러우저를 가지고 옴
+        webView.webViewClient = CookWebViewClient();
+        webView.webChromeClient = CookWebChromeClient();
+        //웹 셋팅을 함
+        val webSet = webView.settings;
+
+        //크고 작게하는 기능을 줌
+        webSet!!.setBuiltInZoomControls(true);
+        webSet!!.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
+        webSet!!.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
+        webSet!!.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
+        webSet!!.setLoadWithOverviewMode(true); // 메타태그 허용 여부
+        webSet!!.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
+        webSet!!.setSupportZoom(false); // 화면 줌 허용 여부
+        webSet!!.setBuiltInZoomControls(false); // 화면 확대 축소 허용 여부
+        webSet!!.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+        webSet!!.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
+        webSet!!.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+        webView!!.webViewClient = WebViewClient()
+        webView!!.loadUrl("http://192.168.4.15:9090/Scheduler/")
+        webView!!.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (webView != null) {
+                        if (webView.canGoBack()) {
+                            webView.goBack()
+                        } else {
+                            requireActivity().onBackPressed()
+                        }
+                    }
+                }
+            }
+            true
+        }
+
+        return view;
+    }
+
+    class CookWebViewClient : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+            return super.shouldOverrideUrlLoading(view, url)
+        }
+
+    }
+
+    class CookWebChromeClient : WebChromeClient(){
+
+        override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+            Log.d("ConsoleLog", consoleMessage?.message() + '\n' + consoleMessage?.messageLevel() + '\n' + consoleMessage?.sourceId());
+            return super.onConsoleMessage(consoleMessage)
+        }
+
     }
 
     companion object {
