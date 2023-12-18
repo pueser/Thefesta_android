@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Thefesta</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="food_detail_title">음식점명</string>
+    <string name="food_detail_addr">주소</string>
+    <string name="food_detail_tel">전화</string>
+    <string name="food_detail_opentime">영업 시간</string>
+    <string name="food_detail_restdate">휴무일</string>
+    <string name="food_detail_parking">주차 시설</string>
+    <string name="food_detail_firstmenu">대표 메뉴</string>
+    <string name="food_detail_treatmenu">취급 메뉴</string>
+    <string name="food_detail_overview">소개</string>
+    <string name="food_detail_location">위치</string>
 </resources>

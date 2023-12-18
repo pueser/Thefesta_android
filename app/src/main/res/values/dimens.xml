@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="food_detail_width">350dp</dimen>
+    <dimen name="food_detail_cat_width">85dp</dimen>
+    <dimen name="food_detail_content_width">265dp</dimen>
+    <dimen name="food_detail_likesize">25dp</dimen>
+    <dimen name="food_detail_text_marginTop">14dp</dimen>
+    <dimen name="food_detail_title_textsize">26sp</dimen>
+    <dimen name="food_detail_cat_textsize">17sp</dimen>
+    <dimen name="food_detail_content_textsize">16sp</dimen>
 </resources>
