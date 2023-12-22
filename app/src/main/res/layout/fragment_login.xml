@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottomnavi.User">
+    android:layout_marginTop="500px"
+    tools:context=".member.Login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,7 +81,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.thefesta.bottomnavi
+package com.example.thefesta.member
 
 import android.app.Activity
 import android.content.ContentValues
@@ -25,7 +25,6 @@ import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.databinding.FragmentMyPageBinding
-import com.example.thefesta.member.Withdrawal
 import com.example.thefesta.model.member.MemberDTO
 import com.example.thefesta.retrofit.MemberClient
 import com.example.thefesta.service.IMemberService
@@ -39,7 +38,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class User : Fragment() {
+class MyPage : Fragment() {
 
     private lateinit var binding: FragmentMyPageBinding
     private lateinit var memberService: IMemberService

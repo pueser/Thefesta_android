@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".member.Join">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/joinId"
+                android:layout_width="717px"
+                android:layout_height="wrap_content"
+                android:hint="아이디" />
+
+            <Button
+                android:id="@+id/joinIdCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15px"
+                android:text="중복체크" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/joinIdError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/joinNickname"
+                android:layout_width="717px"
+                android:layout_height="wrap_content"
+                android:hint="닉네임" />
+
+            <Button
+                android:id="@+id/joinNicknameCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="중복체크"
+                android:layout_marginLeft="15px"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/joinNicknameError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/joinVerificationCode"
+                android:layout_width="420px"
+                android:layout_height="wrap_content"
+                android:hint="인증번호" />
+
+            <Button
+                android:id="@+id/joinVerificationCodeSend"
+                android:layout_width="345px"
+                android:layout_height="wrap_content"
+                android:text="인증번호 전송"
+                android:layout_marginLeft="15px"/>
+
+            <Button
+                android:id="@+id/joinVerificationCodeCheck"
+                android:layout_width="200px"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                android:layout_marginLeft="15px"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/joinVerificationCodeError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <EditText
+            android:id="@+id/joinPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="비밀번호" />
+
+        <TextView
+            android:id="@+id/joinPasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <EditText
+            android:id="@+id/joinRePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="비밀번호 재입력" />
+
+        <TextView
+            android:id="@+id/joinRePasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/joinButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가입" />
+
+            <Button
+                android:id="@+id/joinCencelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:layout_marginLeft="15px"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

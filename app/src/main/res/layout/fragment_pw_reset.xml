@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".member.PwReset">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/pwResetId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일" />
+
+        <TextView
+            android:id="@+id/pwResetIdError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/pwResetVerificationCode"
+                android:layout_width="420px"
+                android:layout_height="wrap_content"
+                android:hint="인증번호" />
+
+            <Button
+                android:id="@+id/pwResetVerificationCodeSend"
+                android:layout_width="345px"
+                android:layout_height="wrap_content"
+                android:text="인증번호 전송"
+                android:layout_marginLeft="15px"/>
+
+            <Button
+                android:id="@+id/pwResetVerificationCodeCheck"
+                android:layout_width="200px"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                android:layout_marginLeft="15px"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pwResetVerificationCodeError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <EditText
+            android:id="@+id/pwResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="새 비밀번호" />
+
+        <TextView
+            android:id="@+id/pwResetPasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <EditText
+            android:id="@+id/pwResetRePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="비밀번호 확인" />
+
+        <TextView
+            android:id="@+id/pwResetRePasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pwResetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="확인" />
+
+            <Button
+                android:id="@+id/pwResetCencelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:layout_marginLeft="15px"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
