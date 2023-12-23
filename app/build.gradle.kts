@@ -60,4 +60,7 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(files("libs/libDaumMapAndroid.jar"))
+
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.github.bumptech.glide:compiler:4.12.0")
 }

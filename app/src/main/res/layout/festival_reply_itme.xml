@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/festivalReplyUserImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/noimage"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/festivalReplyUserNick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="닉네임"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/festivalReplyContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="댓글 내용"/>
+
+    <EditText
+        android:id="@+id/festivalReplyModifyInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="댓글 내용"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/festivalReplyDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2023.12.21"
+            android:gravity="start"/>
+
+        <LinearLayout
+            android:id="@+id/festivalReplyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end">
+            <Button
+                android:id="@+id/festivalReplyModifyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="수정"/>
+            <Button
+                android:id="@+id/festivalReplyDeleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="삭제"/>
+            <Button
+                android:id="@+id/festivalReplyReportBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신고"/>
+
+            <Button
+                android:id="@+id/festivalReplyModifySubmitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="저장"/>
+            <Button
+                android:id="@+id/festivalReplyModifyCancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="취소"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".festival.FestivalLikeList"
+    android:layout_marginTop="80dp"
+    android:layout_marginBottom="100dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="좋아요"/>
+
+        <CheckBox
+            android:id="@+id/likeListAllCheckBox"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/replyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/likeListEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="220dp"
+            android:paddingBottom="220dp"
+            android:gravity="center"
+            android:text="좋아요를 누른 축제가 없습니다."
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/likeListAllCheckBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="전체선택"
+                android:textSize="13sp"/>
+
+            <Button
+                android:id="@+id/likeListDeleteBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="삭제"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/likeListPaginationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
