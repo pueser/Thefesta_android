@@ -35,7 +35,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/like"
+                android:id="@+id/likeBtn"
                 android:layout_width="@dimen/food_detail_likesize"
                 android:layout_height="@dimen/food_detail_likesize"
                 android:layout_gravity="center"

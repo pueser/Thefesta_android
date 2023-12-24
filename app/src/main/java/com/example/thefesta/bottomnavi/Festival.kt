@@ -18,21 +18,9 @@ class Festival : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_festival, container, false)
-        val foodBtn: Button = view.findViewById(R.id.foodBtn)
-        // foodBtn 버튼 클릭시
-        foodBtn.setOnClickListener {
-            navigateToFoodListFragment()
-        }
+
         navigateToFestivalListFragment()
         return view
-    }
-    private fun navigateToFoodListFragment() {
-
-        val foodListFragment = FoodList() // FoodList 프래그먼트의 인스턴스 생성
-        val transaction = requireActivity().supportFragmentManager.beginTransaction() // 프래그먼트 트랜잭션 시작
-        transaction.replace(R.id.container, foodListFragment) // 현재 프래그먼트를 FoodList 프래그먼트로 교체
-        transaction.addToBackStack(null) // 트랜잭션을 백 스택에 추가 (선택 사항)
-        transaction.commit()  // 트랜잭션 커밋
     }
 
     private fun navigateToFestivalListFragment() {

@@ -56,11 +56,7 @@ class Holder(val binding: FooditemBinding): RecyclerView.ViewHolder(binding.root
             }
 
             val foodTitle = it.title
-            if (foodTitle.length <= 16) {
-                binding.title.text = foodTitle
-            } else {
-                binding.title.text = foodTitle.substring(0,16)+".."
-            }
+            binding.title.text = foodTitle
 
             val foodAddr = it.addr1
             if (foodAddr.isNotEmpty()) {

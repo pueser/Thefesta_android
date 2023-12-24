@@ -461,6 +461,23 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="@dimen/food_detail_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/foodListContainer">
+
+            <fragment
+                android:id="@+id/foodListFragment"
+                android:name="com.example.thefesta.food.FoodList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/food_detail_text_marginTop"
+                android:layout_marginBottom="20dp"
+                tools:layout="@layout/fragment_food_list" />
+
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/replyRecyclerView"
             android:layout_width="match_parent"

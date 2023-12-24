@@ -12,12 +12,4 @@
         android:text="축제 화면"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/foodBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="음식점 추천"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"/>
-
 </FrameLayout>

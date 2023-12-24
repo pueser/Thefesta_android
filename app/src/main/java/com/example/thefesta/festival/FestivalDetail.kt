@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.databinding.FragmentFestivalDetailBinding
+import com.example.thefesta.food.FoodList
 import com.example.thefesta.model.festival.FestivalImgItemDTO
 import com.example.thefesta.model.festival.FestivalItemDTO
 import com.example.thefesta.model.festival.FestivalReplyDTO
@@ -35,7 +36,8 @@ import retrofit2.Response
 class FestivalDetail : Fragment() {
 
     private lateinit var binding: FragmentFestivalDetailBinding
-    private val festivalService: IFestivalService = FestivalClient.retrofit.create(IFestivalService::class.java)
+    private val festivalService: IFestivalService =
+        FestivalClient.retrofit.create(IFestivalService::class.java)
     private lateinit var paginationLayout: LinearLayout
     private var userInfo: MemberDTO? = null
     private var customAdapter = FestivalReplyAdapter(emptyList(), userInfo)
@@ -57,6 +59,13 @@ class FestivalDetail : Fragment() {
 
         val contentid = arguments?.getString(ARG_CONTENT_ID)
         paginationLayout = view.findViewById(R.id.replyPaginationLayout)
+
+        // FoodList 프래그먼트를 추가
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.foodListContainer, FoodList().apply {
+                arguments = Bundle().apply { putString("contentid", contentid) }
+            })
+            .commit()
 
         if (id != "") {
             getUserInfo(id)
@@ -81,18 +90,23 @@ class FestivalDetail : Fragment() {
 
                         updateFestivalDetail(festivalInfo)
 
-                        Log.d("FestivalInfo",
-                            "contentid: ${it}, title: ${festivalInfo?.title}, sponsor1: ${festivalInfo?.sponsor1}, ${festivalInfo?.agelimit}")
+                        Log.d(
+                            "FestivalInfo",
+                            "contentid: ${it}, title: ${festivalInfo?.title}, sponsor1: ${festivalInfo?.sponsor1}, ${festivalInfo?.agelimit}"
+                        )
 
                         fetivalImgList?.forEach { fImg ->
-                            Log.d("FestivalImg",
-                                "ffileno: ${fImg.ffileno}, originimgurl: ${fImg.originimgurl}, serialnum: ${fImg.serialnum}")
+                            Log.d(
+                                "FestivalImg",
+                                "ffileno: ${fImg.ffileno}, originimgurl: ${fImg.originimgurl}, serialnum: ${fImg.serialnum}"
+                            )
                         }
 
                         replyList(contentid, page)
 
                         if (userInfo != null) {
-                            Glide.with(binding.userImg.context).load(userInfo!!.profileImg).into(binding.userImg)
+                            Glide.with(binding.userImg.context).load(userInfo!!.profileImg)
+                                .into(binding.userImg)
                             binding.userNick.text = userInfo!!.nickname
                         }
 
@@ -102,7 +116,11 @@ class FestivalDetail : Fragment() {
 
                                 handleReplyInsert(contentid, replyContent)
                             } else {
-                                Toast.makeText(requireContext(), "회원만 댓글 등록이 가능합니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "회원만 댓글 등록이 가능합니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                         }
@@ -115,7 +133,7 @@ class FestivalDetail : Fragment() {
                 }
             })
         }
-        
+
     }
 
     private fun getUserInfo(id: String) {
@@ -155,7 +173,8 @@ class FestivalDetail : Fragment() {
     }
 
     private fun replyList(contentid: String, page: Int) {
-        val replyListCall: Call<FestivalReplyResponse> = festivalService.getReplyList(page = page, contentid = contentid)
+        val replyListCall: Call<FestivalReplyResponse> =
+            festivalService.getReplyList(page = page, contentid = contentid)
 
         replyListCall.enqueue(object : Callback<FestivalReplyResponse> {
             override fun onResponse(
@@ -169,14 +188,15 @@ class FestivalDetail : Fragment() {
                     val replyList: List<FestivalReplyDTO>? = festivalResponse?.list
                     Log.d("FestivalDetailReply", "댓글 목록 : ${replyList}")
 
-                    endPage = festivalResponse?.pageMaker?.realEnd ?:1
-                    total = festivalResponse?.pageMaker?.total ?:1
+                    endPage = festivalResponse?.pageMaker?.realEnd ?: 1
+                    total = festivalResponse?.pageMaker?.total ?: 1
 
                     setupPagination(festivalResponse?.pageMaker)
                     showReplies(replyList)
 
                     // 댓글 삭제
-                    customAdapter.setOnDeleteButtonClickListener(object :FestivalReplyAdapter.OnDeleteButtonClickListener {
+                    customAdapter.setOnDeleteButtonClickListener(object :
+                        FestivalReplyAdapter.OnDeleteButtonClickListener {
                         override fun onDeleteButtonClick(frno: Int) {
                             Log.d("FestivalDeleteBtn", "frno : ${frno}")
                             val alertDialog = AlertDialog.Builder(requireContext())
@@ -185,10 +205,17 @@ class FestivalDetail : Fragment() {
                                 .setPositiveButton("확인") { _, _ ->
                                     val call: Call<String> = festivalService.replyDelete(frno)
                                     call.enqueue(object : Callback<String> {
-                                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                                        override fun onResponse(
+                                            call: Call<String>,
+                                            response: Response<String>
+                                        ) {
                                             if (response.isSuccessful) {
                                                 Log.d("FestivalDeleteBtn", "댓글 삭제 완료")
-                                                Toast.makeText(requireContext(), "댓글이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "댓글이 삭제되었습니다.",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                                 replyList(contentid, page)
                                             } else {
                                                 Log.d("FestivalDeleteBtn", "댓글 삭제 실패")
@@ -202,7 +229,11 @@ class FestivalDetail : Fragment() {
                                     })
                                 }
                                 .setNegativeButton("취소", { _, _ ->
-                                    Toast.makeText(requireContext(), "댓글 삭제가 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "댓글 삭제가 취소되었습니다.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 })
 
                             alertDialog.show()
@@ -210,12 +241,16 @@ class FestivalDetail : Fragment() {
                     })
 
                     // 댓글 저장
-                    customAdapter.setOnModifySubmitButtonClickListener(object :FestivalReplyAdapter.OnModifySubmitButtonClickListener {
+                    customAdapter.setOnModifySubmitButtonClickListener(object :
+                        FestivalReplyAdapter.OnModifySubmitButtonClickListener {
                         override fun onModifySubmitButtonClick(frDTO: FestivalReplyDTO) {
                             Log.d("FestivalModifySubmitBtn", "저장 버튼 클릭 : ${frDTO}")
                             val call: Call<String> = festivalService.replyModify(frDTO)
                             call.enqueue(object : Callback<String> {
-                                override fun onResponse(call: Call<String>, response: Response<String>) {
+                                override fun onResponse(
+                                    call: Call<String>,
+                                    response: Response<String>
+                                ) {
                                     if (response.isSuccessful) {
                                         Log.d("FestivalModifySubmitBtn", "댓글 저장 완료")
                                         replyList(contentid, page)
@@ -233,17 +268,23 @@ class FestivalDetail : Fragment() {
                     })
 
                     // 댓글 신고
-                    customAdapter.setOnReportButtonClickListener(object : FestivalReplyAdapter.OnReportButtonClickListener {
+                    customAdapter.setOnReportButtonClickListener(object :
+                        FestivalReplyAdapter.OnReportButtonClickListener {
                         override fun onReportButtonClick(frDTO: FestivalReplyDTO) {
                             if (id != "") {
                                 Log.d("FestivalReportBtn", "신고 버튼 클릭 : ${frDTO}")
-                                val festivalReplyReportFragment = FestivalReplyReport.newInstance(id, frDTO.id, frDTO.frno)
+                                val festivalReplyReportFragment =
+                                    FestivalReplyReport.newInstance(id, frDTO.id, frDTO.frno)
                                 requireActivity().supportFragmentManager.beginTransaction()
                                     .replace(R.id.container, festivalReplyReportFragment)
                                     .addToBackStack(null)
                                     .commit()
                             } else {
-                                Toast.makeText(requireContext(), "회원만 댓글 신고가 가능합니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "회원만 댓글 신고가 가능합니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     })
@@ -337,7 +378,8 @@ class FestivalDetail : Fragment() {
     }
 
     private fun hideKeyboard() {
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val view = requireActivity().currentFocus
         view?.let { imm.hideSoftInputFromWindow(it.windowToken, 0) }
     }
@@ -354,7 +396,7 @@ class FestivalDetail : Fragment() {
     }
 
     private fun updateFestivalDetail(festivalItemDTO: FestivalItemDTO?) {
-        Log.d("FestivalDetail", "Binding is null: ${binding == null}" )
+        Log.d("FestivalDetail", "Binding is null: ${binding == null}")
 
         binding.title.text = festivalItemDTO?.title ?: ""
         binding.eventstartdate.text = festivalDate(festivalItemDTO?.eventstartdate) ?: ""
@@ -371,17 +413,28 @@ class FestivalDetail : Fragment() {
         binding.usetimefestival.text = fm(festivalItemDTO?.usetimefestival) ?: ""
         binding.playtime.text = fm(festivalItemDTO?.playtime) ?: ""
 
-        binding.addr1Layout.visibility = if (festivalItemDTO?.addr1.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.eventintroLayout.visibility = if (festivalItemDTO?.eventintro.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.eventtextLayout.visibility = if (festivalItemDTO?.eventtext.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.homepageLayout.visibility = if (festivalItemDTO?.homepage.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.agelimitLayout.visibility = if (festivalItemDTO?.agelimit.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.sponsor1Layout.visibility = if (festivalItemDTO?.sponsor1.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.sponsor1telLayout.visibility = if (festivalItemDTO?.sponsor1tel.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.sponsor2Layout.visibility = if (festivalItemDTO?.sponsor2.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.sponsor2telLayout.visibility = if (festivalItemDTO?.sponsor2tel.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.usetimefestivalLayout.visibility = if (festivalItemDTO?.usetimefestival.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.playtimeLayout.visibility = if (festivalItemDTO?.playtime.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.addr1Layout.visibility =
+            if (festivalItemDTO?.addr1.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.eventintroLayout.visibility =
+            if (festivalItemDTO?.eventintro.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.eventtextLayout.visibility =
+            if (festivalItemDTO?.eventtext.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.homepageLayout.visibility =
+            if (festivalItemDTO?.homepage.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.agelimitLayout.visibility =
+            if (festivalItemDTO?.agelimit.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.sponsor1Layout.visibility =
+            if (festivalItemDTO?.sponsor1.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.sponsor1telLayout.visibility =
+            if (festivalItemDTO?.sponsor1tel.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.sponsor2Layout.visibility =
+            if (festivalItemDTO?.sponsor2.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.sponsor2telLayout.visibility =
+            if (festivalItemDTO?.sponsor2tel.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.usetimefestivalLayout.visibility =
+            if (festivalItemDTO?.usetimefestival.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.playtimeLayout.visibility =
+            if (festivalItemDTO?.playtime.isNullOrEmpty()) View.GONE else View.VISIBLE
     }
 
     fun festivalDate(date: String?): String {
