@@ -3,6 +3,7 @@ package com.example.thefesta.food
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -200,20 +201,31 @@ class FoodDetail : Fragment() {
     private fun updateFoodDetail(itemDto: ItemDTO?) {
         Log.d("FoodDetail", "Binding is null: ${binding == null}")
 
-        val foodImage = itemDto?.firstimage
-        Glide.with(binding.firstimage.context)
-            .load(foodImage)
-            .placeholder(R.drawable.noimage)
-            .into(binding.firstimage)
-        binding.title.text = itemDto?.title ?: ""
-        binding.addr.text = itemDto?.addr1 ?: ""
-        binding.tel.text = itemDto?.infocenterfood ?: ""
-        binding.opentime.text = itemDto?.opentimefood ?: ""
-        binding.restdate.text = itemDto?.restdatefood ?: ""
-        binding.parking.text = itemDto?.parkingfood ?: ""
-        binding.firstmenu.text = itemDto?.firstmenu ?: ""
-        binding.treatmenu.text = itemDto?.treatmenu ?: ""
-        binding.overview.text = itemDto?.overview ?: "정보 없음"
+        if (itemDto != null) {
+            val foodImage = itemDto.firstimage
+            Glide.with(binding.firstimage.context)
+                .load(foodImage)
+                .placeholder(R.drawable.noimage)
+                .into(binding.firstimage)
+
+            val title = itemDto.title ?: ""
+            val cleanedTitle = cleanTitle(title)
+            binding?.title?.text = cleanedTitle
+            binding?.addr?.text = itemDto.addr1 ?: ""
+            binding?.tel?.text = itemDto.infocenterfood ?: ""
+            binding?.opentime?.text = itemDto.opentimefood ?: ""
+            binding?.restdate?.text = itemDto.restdatefood ?: ""
+            binding?.parking?.text = itemDto.parkingfood ?: ""
+            binding?.firstmenu?.text = itemDto.firstmenu ?: ""
+            binding?.treatmenu?.text = itemDto.treatmenu ?: ""
+            binding?.overview?.text = itemDto.overview ?: "정보 없음"
+        } else {
+            Log.e("FoodDetail", "ItemDTO is null")
+        }
+    }
+
+    private fun cleanTitle(title: String): String {
+        return title.replace("\\([^)]*\\)".toRegex(), "").trim()
     }
 
     companion object {

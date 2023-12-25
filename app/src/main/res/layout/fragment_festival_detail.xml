@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".festival.FestivalDetail"
@@ -464,8 +465,10 @@
         <RelativeLayout
             android:layout_width="@dimen/food_detail_width"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/foodListContainer">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/foodListContainer"
+            android:layout_below="@+id/eventtextLayout">
 
             <fragment
                 android:id="@+id/foodListFragment"
@@ -473,7 +476,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/food_detail_text_marginTop"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="500dp"
                 tools:layout="@layout/fragment_food_list" />
 
         </RelativeLayout>

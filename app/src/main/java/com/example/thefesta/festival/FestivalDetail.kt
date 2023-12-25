@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +46,36 @@ class FestivalDetail : Fragment() {
     private var endPage = 1
     private var total = 1
     private val id = MainActivity.prefs.getString("id", "")
+
+    //음식점 추천 프래그먼트 위치 저장 및 복원
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        val layoutParams = binding.foodListContainer.layoutParams as RelativeLayout.LayoutParams
+        outState.putInt("foodListFragment_topMargin", layoutParams.topMargin)
+        outState.putInt("foodListFragment_bottomMargin", layoutParams.bottomMargin)
+        outState.putInt("foodListFragment_leftMargin", layoutParams.leftMargin)
+        outState.putInt("foodListFragment_rightMargin", layoutParams.rightMargin)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+
+            val topMargin = savedInstanceState.getInt("foodListFragment_topMargin", 0)
+            val bottomMargin = savedInstanceState.getInt("foodListFragment_bottomMargin", 0)
+            val leftMargin = savedInstanceState.getInt("foodListFragment_leftMargin", 0)
+            val rightMargin = savedInstanceState.getInt("foodListFragment_rightMargin", 0)
+
+            val layoutParams = binding.foodListContainer.layoutParams as RelativeLayout.LayoutParams
+            layoutParams.topMargin = topMargin
+            layoutParams.bottomMargin = bottomMargin
+            layoutParams.leftMargin = leftMargin
+            layoutParams.rightMargin = rightMargin
+
+            binding.foodListContainer.layoutParams = layoutParams
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

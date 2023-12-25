@@ -1,5 +1,6 @@
 package com.example.thefesta.food
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,21 @@ class CustomAdapter: RecyclerView.Adapter<Holder>() {
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(food!!)
         }
+
+        // title의 괄호 삭제
+        val foodTitle = food?.title
+        if (!foodTitle.isNullOrEmpty()) {
+            val cleanedTitle = foodTitle.replace("\\([^)]*\\)".toRegex(), "").trim()
+            holder.binding.title.text = cleanedTitle
+
+            //title의 길이 수에 따른 글자 크기 지정
+            val maxTitleLength = 15
+            if (cleanedTitle.length > maxTitleLength) {
+                holder.binding.title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
+            } else {
+                holder.binding.title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -51,7 +67,6 @@ class Holder(val binding: FooditemBinding): RecyclerView.ViewHolder(binding.root
             if (!foodImage.isNullOrEmpty()) {
                 Glide.with(binding.firstimage2.context).load(foodImage).into(binding.firstimage2)
             } else {
-                //이미지가 없는 경우
                 binding.firstimage2.setImageResource(R.drawable.noimage)
             }
 
