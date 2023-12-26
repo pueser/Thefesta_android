@@ -30,6 +30,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:text="음식점명"
+            android:fontFamily="@font/notoregular"
+            android:includeFontPadding="false"
             android:textSize="17sp"
             android:textStyle="bold" />
         <TextView
@@ -40,6 +42,8 @@
             android:layout_marginLeft="5dp"
             android:text="주소"
             android:textSize="14sp"
+            android:fontFamily="@font/notoregular"
+            android:includeFontPadding="false"
             android:textColor="#A8A8A8"
             android:textStyle="normal"/>
 

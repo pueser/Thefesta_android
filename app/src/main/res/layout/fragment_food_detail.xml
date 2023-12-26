@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -33,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/food_detail_title"
+                android:fontFamily="@font/notobold"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/food_detail_title_textsize"
                 android:textStyle="bold" />
 
@@ -62,6 +65,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_addr"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -70,6 +75,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_addr"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -92,6 +99,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_tel"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -100,6 +109,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_tel"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -122,6 +133,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_opentime"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -130,6 +143,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_opentime"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -152,6 +167,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_restdate"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -160,6 +177,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_restdate"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -182,6 +201,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_parking"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -190,6 +211,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_parking"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -212,6 +235,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_firstmenu"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -220,6 +245,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_firstmenu"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -242,6 +269,8 @@
                     android:layout_width="@dimen/food_detail_cat_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_treatmenu"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/food_detail_cat_textsize"
                     android:textStyle="bold" />
 
@@ -250,6 +279,8 @@
                     android:layout_width="@dimen/food_detail_content_width"
                     android:layout_height="wrap_content"
                     android:text="@string/food_detail_treatmenu"
+                    android:fontFamily="@font/notoregular"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -267,6 +298,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/food_detail_overview"
+                android:fontFamily="@font/notoregular"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/food_detail_cat_textsize"
                 android:textStyle="bold" />
 
@@ -275,6 +308,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/food_detail_overview"
+                android:fontFamily="@font/notoregular"
+                android:includeFontPadding="false"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/food_detail_content_textsize" />
 
@@ -290,14 +325,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/food_detail_location"
+                android:fontFamily="@font/notoregular"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/food_detail_cat_textsize"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/map"
+            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:layout_marginBottom="50dp" />
+                android:id="@+id/map"
+                android:layout_marginBottom="30dp"
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
         </LinearLayout>
 

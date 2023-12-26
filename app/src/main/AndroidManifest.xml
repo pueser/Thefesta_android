@@ -24,6 +24,11 @@
         android:theme="@style/Theme.Thefesta"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBmwlc2_HsdOJFT_bed2vnoF8veOOiIOuE"/>
+
         <activity
             android:name=".AdminActivity"
             android:exported="false" />

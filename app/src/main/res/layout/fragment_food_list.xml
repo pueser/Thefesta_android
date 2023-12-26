@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="21sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/notobold"
+        android:includeFontPadding="false"
         android:textStyle="bold"
         android:gravity="left|center"/>
 

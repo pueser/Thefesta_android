@@ -1,16 +1,12 @@
 package com.example.thefesta.food
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
@@ -20,19 +16,25 @@ import com.example.thefesta.model.food.LikeDTO
 import com.example.thefesta.model.food.LikeResponse
 import com.example.thefesta.retrofit.FoodClient
 import com.example.thefesta.service.IFoodService
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.UiSettings
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FoodDetail : Fragment() {
+class FoodDetail : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentFoodDetailBinding
     private val foodService: IFoodService = FoodClient.retrofit.create(IFoodService::class.java)
     private lateinit var mapView: MapView
     private val id = MainActivity.prefs.getString("id", "")
+    private var mMap: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,6 +45,10 @@ class FoodDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 음식점 위치 맵 설정
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         val contentId = arguments?.getString(ARG_CONTENT_ID)   // food contentId 가져오기
         var isLiked = false   // 좋아요를 누르지 않은 상태로 초기 설정
@@ -56,30 +62,6 @@ class FoodDetail : Fragment() {
                         val itemDto: ItemDTO = response.body()!!
                         Log.d("FoodDetail_ItemDto", itemDto.toString())  //데이터 확인
                         updateFoodDetail(itemDto)   // UI 업데이트
-
-                        // 음식점 위치 지도로 표시
-                        mapView = MapView(requireContext())
-                        val mapViewContainer = binding.map
-                        mapViewContainer.addView(mapView)
-
-                        val mapx = itemDto?.mapx?.toDouble() ?: 0.0
-                        val mapy = itemDto?.mapy?.toDouble() ?: 0.0
-                        mapView.setMapCenterPointAndZoomLevel(
-                            MapPoint.mapPointWithGeoCoord(
-                                mapy,
-                                mapx
-                            ), 2, true
-                        )
-                        mapView.zoomIn(true);
-                        mapView.zoomOut(true);
-
-                        val marker = MapPOIItem()
-                        marker.itemName = itemDto?.title
-                        marker.tag = 0
-                        marker.mapPoint = MapPoint.mapPointWithGeoCoord(mapy, mapx)
-                        marker.markerType = MapPOIItem.MarkerType.BluePin
-                        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
-                        mapView.addPOIItem(marker)
 
                         // 좋아요 버튼 클릭 시
                         binding.likeBtn.setOnClickListener() {
@@ -146,6 +128,46 @@ class FoodDetail : Fragment() {
                         // 사용자의 좋아요 목록 조회하여 likeBtn 업데이트
                         checkUserLiked(id, itemDto.contentid)
 
+                    } else {
+                        Log.e("FoodDetail", "Failed to fetch data")
+                    }
+                }
+                override fun onFailure(call: Call<ItemDTO>, t: Throwable) {
+                    Log.e("FoodDetail", "Network request failed", t)
+                    t.printStackTrace()
+                }
+            })
+        } else {
+            Log.e("FoodDetail", "contentId is null or empty")
+        }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        val contentId = arguments?.getString(ARG_CONTENT_ID)
+
+        if (contentId != null) {
+            val call: Call<ItemDTO> = foodService.getFoodDetail(contentId = contentId)
+            call.enqueue(object : Callback<ItemDTO> {
+                override fun onResponse(call: Call<ItemDTO>, response: Response<ItemDTO>) {
+                    if (response.isSuccessful) {
+                        val itemDto: ItemDTO = response.body()!!
+
+                        val mapx = itemDto.mapx?.toDouble() ?: 0.0
+                        val mapy = itemDto.mapy?.toDouble() ?: 0.0
+
+                        val foodLocation = LatLng(mapy, mapx)
+
+                        val markerOptions = MarkerOptions()
+                        markerOptions.position(foodLocation)
+                        markerOptions.title(itemDto.title)
+
+                        mMap?.addMarker(markerOptions)
+                        mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(foodLocation, 17f))
+
+                        val mMapUiSettings: UiSettings = mMap!!.uiSettings
+                        mMapUiSettings.isZoomControlsEnabled = true
                     } else {
                         Log.e("FoodDetail", "Failed to fetch data")
                     }
