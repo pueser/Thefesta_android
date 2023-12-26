@@ -1,0 +1,77 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <!-- TableRow for each item in the festaList -->
+
+        <TableRow
+            android:id="@+id/adminFestaQuestionTbody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#eeeeee"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/festaQuestionNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp"
+                android:textAlignment="center"
+                />
+
+            <TextView
+                android:id="@+id/festaQuestionContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/festaQuestionWriter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/festaQuestionDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp"
+                android:textAlignment="center"
+                android:layout_marginRight="5dp"/>
+
+
+            <Button
+                android:id="@+id/festaCheckBtn"
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/admin_rectangle_button"
+                android:onClick="deleteClick"
+                android:text="확인"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:clickable="true"/>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

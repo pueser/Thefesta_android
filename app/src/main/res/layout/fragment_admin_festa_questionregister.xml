@@ -1,0 +1,67 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/adminDetailDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/admin_FestaQuestionRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:background="#6A1B9A"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            android:gravity="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_below="@id/admin_FestaQuestionRegister"
+            android:fillViewport="true"
+            style="@style/NoBorderTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/admin_FestaQuestionRegisterContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:inputType="textMultiLine"
+                android:hint="1000자까지 입력해주세요"
+                android:background="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_FestaQuestionRegisterContent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal">
+
+        <Button
+            android:id="@+id/adminRegisterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성완료"
+            android:onClick="cheackButtonClick"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/admin_rectangle_button"/>
+
+        <Button
+            android:id="@+id/adminCancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성취소"
+            android:onClick="cheackButtonClick"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/admin_rectangle_button"/>
+    </LinearLayout>
+</LinearLayout>

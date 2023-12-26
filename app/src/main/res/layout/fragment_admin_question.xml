@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Header LinearLayout -->
     <LinearLayout
-        android:id="@+id/adminboard"
+        android:id="@+id/adminfesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,77 +18,66 @@
         android:layout_marginTop="50dp">
 
         <TextView
-            android:id="@+id/headerReportId"
+            android:id="@+id/header_QuestionNum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="신고번호"
+            android:text="문의번호"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/headerReportContent"
+            android:id="@+id/header_QuestionTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="신고내용"
+            android:text="문의제목"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/headerReportReporter"
+            android:id="@+id/header_QuestionContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="신고자"
+            android:text="문의 내용"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/headerReportnumber"
+            android:id="@+id/header_QuestionWriter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="신고대상"
+            android:text="작성자"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/headerReportDay"
+            android:id="@+id/header_QuestionDay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="신고일자"
+            android:text="작성일자"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/headerReportApprove"
+            android:id="@+id/header_QuestionRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="승인"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/headerReportDelete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="반려"
+            android:text="답변하기"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -98,7 +88,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="585dp"
-        android:layout_below="@id/adminboard"
+        android:layout_below="@id/adminfesta"
         android:clipChildren="false"
         android:clipToPadding="false"
         tools:layout_editor_absoluteX="0dp"

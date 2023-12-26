@@ -1,16 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".adminbottomnavi.AdminMember">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Header LinearLayout -->
+    <LinearLayout
+        android:id="@+id/adminmember"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="회원"
-        android:textSize="30sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#6A1B9A"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:layout_marginTop="50dp">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/headerMemberNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="번호"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/headerMemberId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="아이디"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/headerMemberState"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="상태"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/headerMemberReportAll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="신고누적"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/headerMemberReportNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="강퇴누적"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/headerMemberFinalaccess"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="최근접속일"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+        android:layout_height="585dp"
+    android:layout_below="@id/adminmember"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="231dp" />
+
+</RelativeLayout>

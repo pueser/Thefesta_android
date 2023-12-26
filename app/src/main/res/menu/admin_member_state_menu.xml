@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_expel"
+        android:title="강퇴" />
+    <item
+        android:id="@+id/menu_rejoinable"
+        android:title="재가입가능" />
+    <item
+        android:id="@+id/menu_normal"
+        android:title="일반" />
+    <item
+        android:id="@+id/menu_withdraw"
+        android:title="탈퇴" />
+</menu>

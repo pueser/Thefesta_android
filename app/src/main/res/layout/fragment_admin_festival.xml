@@ -1,16 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".adminbottomnavi.AdminFestival">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/adminfesta"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="축제리스트"
-        android:textSize="30sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#6A1B9A"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:layout_marginTop="50dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/headerFestivalNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="축제번호"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="축제제목"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalAddr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="장소"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalStartDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="시작일자"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalEndDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="종료일자"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalQuestioncount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="건의건수"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/headerFestivalDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="삭제"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="585dp"
+        android:layout_below="@id/adminfesta"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="231dp" />
+
+</RelativeLayout>
