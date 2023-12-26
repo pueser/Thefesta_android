@@ -99,7 +99,7 @@ class AdminActivity : AppCompatActivity() {
                 //세번째 버튼 클릭
                 R.id.adminuser -> {
                     with(supportFragmentManager.beginTransaction()) {
-                        val adminmember = AdminFestaQuestionRegister()
+                        val adminmember = AdminMember()
                         replace(R.id.container_admin, adminmember) // Changed from R.id.container to R.id.container_admin
                         commit()
                     }

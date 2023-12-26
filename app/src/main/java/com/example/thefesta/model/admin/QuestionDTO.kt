@@ -1,7 +1,7 @@
 package com.example.thefesta.model.admin
 
 data class QuestionDTO (
-    var questionid: String? = null,
+    var questionid: Int? = null,
     var questioncontent: String? = null,
     var questiondate: String? = null,
     var questioncount: Double? = null,

@@ -1,17 +1,11 @@
 package com.example.thefesta.service
 
-import com.example.thefesta.model.admin.Criteria
 import com.example.thefesta.model.admin.QuestionDTO
-import com.example.thefesta.model.admin.ReplyDTO
 import com.example.thefesta.model.member.MemberDTO
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.HTTP
-import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -180,10 +174,10 @@ interface IAdminService {
     ): Call<Map<String, Any>>
 
     //문의사항 답변
-    @POST("replies/new")
-    fun postReplies(
-        @Body replyDto: ReplyDTO
-    ): Call<ResponseBody>
+//    @POST("replies/new")
+//    fun postReplies(
+//        @Body replyDto: ReplyDTO
+//    ): Call<ResponseBody>
 
     //문의사항 완료
     @POST("admin/adminQuestionbstatecodeChange")

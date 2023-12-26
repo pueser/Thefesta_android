@@ -13,7 +13,6 @@ import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.adminbottomnavi.AdminQuestion
 import com.example.thefesta.databinding.FragmentAdminQuestionRegisterBinding
-import com.example.thefesta.model.admin.ReplyDTO
 import com.example.thefesta.model.member.MemberDTO
 import com.example.thefesta.retrofit.AdminClient
 import com.example.thefesta.service.IAdminService
@@ -61,53 +60,88 @@ class AdminQuestionRegister : Fragment() {
             getMemberNickName(id)
         }
 
+
+
+        binding.adminRegisterBtn.isEnabled = false // 초기에 버튼 비활성화
+
         binding.adminQuestionRegisterContent.addTextChangedListener(object : TextWatcher {
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // 이전 텍스트 변경 전에 호출되는 메서드
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // 텍스트가 변경될 때 호출되는 메서드
-                val currentLength = s?.length ?: 0
-                if (currentLength > 1000) {
-                    // 1000자 이상이면 Toast 표시 및 작성완료 버튼 비활성화
-                    requireActivity().runOnUiThread {
-                        Toast.makeText(requireContext(), "1000자를 초과하였습니다.", Toast.LENGTH_SHORT).show()
-                        binding.adminRegisterBtn.isEnabled = false
+                activity?.runOnUiThread {
+                    var currentByteLength: Int = 0
+                    if (s != null) {
+                        currentByteLength = calculateByteLength(s.toString())
                     }
-                } else {
-                    // 1000자 이하면 작성완료 버튼 활성화
-                    requireActivity().runOnUiThread {
+                    Log.d("AdminQuestionRegister", "currentByteLength: ${currentByteLength}")
+
+                    if (currentByteLength > 300 || currentByteLength == 0) {
+                        // 3000바이트 이상이거나 글자 수가 없으면 작성완료 버튼 비활성화
+                        binding.adminRegisterBtn.isEnabled = false
+                        if (currentByteLength == 0) {
+                            // 글자 수가 없을 때 "글자를 입력해주세요" 경고창 표시
+                            Toast.makeText(requireContext(), "글자를 입력해주세요", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // 3000바이트 이상이면 "1000글자를 초과하였습니다." 경고창 표시
+                            Toast.makeText(requireContext(), "150자를 초과하였습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        // 3000바이트 이하이면서 글자 수가 있는 경우 작성완료 버튼 활성화
                         binding.adminRegisterBtn.isEnabled = true
                     }
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // 텍스트 변경 후에 호출되는 메서드
+            }
+
+            private fun calculateByteLength(text: String): Int {
+                var byteLength = 0
+                for (char in text) {
+                    byteLength += if ((char.isLetterOrDigit() || char.isWhitespace()) && !char.isHangul()) {
+                        Log.d("AdminQuestionRegister", "1바이트 추가")
+                        1
+                    } else {
+                        Log.d("AdminQuestionRegister", "byteLength: ${byteLength}")
+                        Log.d("AdminQuestionRegister", "3바이트 추가")
+                        3
+                    }
+                }
+                return byteLength
+            }
+
+            private fun Char.isHangul(): Boolean {
+                val unicodeBlock = Character.UnicodeBlock.of(this)
+                return unicodeBlock == Character.UnicodeBlock.HANGUL_SYLLABLES || unicodeBlock == Character.UnicodeBlock.HANGUL_COMPATIBILITY_JAMO || unicodeBlock == Character.UnicodeBlock.HANGUL_JAMO
             }
         })
 
-        binding.adminRegisterBtn.setOnClickListener {
-            content = binding.adminQuestionRegisterContent.text.toString()
-            val replyDTO = ReplyDTO(
-                brno = 0,
-                brcontent = content,
-                brregist = "",  // Replace with the appropriate value for brregist
-                bredit = "",    // Replace with the appropriate value for bredit
-                bid = bid,
-                nickname = nickname ?: "", // Handle the null case for nickname
-                id = id,
-                brstatecode = "" // Replace with the appropriate value for brstatecode
-            )
-            adminRegisterBtnClick(replyDTO)
-        }
+
+//
+//        binding.adminRegisterBtn.setOnClickListener {
+//            content = binding.adminQuestionRegisterContent.text.toString()
+//            val replyDTO = ReplyDTO(
+//                brno = 0,
+//                brcontent = content,
+//                brregist = "",  // Replace with the appropriate value for brregist
+//                bredit = "",    // Replace with the appropriate value for bredit
+//                bid = bid,
+//                nickname = nickname ?: "", // Handle the null case for nickname
+//                id = id,
+//                brstatecode = "" // Replace with the appropriate value for brstatecode
+//            )
+//            adminRegisterBtnClick(replyDTO)
+//        }
 
         binding.adminCancelBtn.setOnClickListener {
             adminCancelBtnClick()
         }
 
     }
+
+
 
     //해당 user nickname 추출
     private fun getMemberNickName(id: String) {
@@ -133,36 +167,36 @@ class AdminQuestionRegister : Fragment() {
 
 
     // 작성완료 버튼 클릭
-    private fun adminRegisterBtnClick(replyDto: ReplyDTO) {
-        replyDto.bid = bid
-        replyDto.brcontent = content
-        replyDto.nickname = nickname.toString()
-        replyDto.id = id
-
-        val retrofit = AdminClient.retrofit
-
-        retrofit.create(IAdminService::class.java).postReplies(replyDto)
-            .enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    if (response.code() == 200) {
-                        Log.d("AdminQuestionRegister", "저장 200: ${response.body()}")
-                        Toast.makeText(requireContext(), "답변등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                        adminRegisterComplete(bid)
-                        val adminQuestion = AdminQuestion.newInstance()
-                        fragmentManager?.beginTransaction()
-                            ?.replace(R.id.container_admin, adminQuestion)
-                            ?.addToBackStack(null)
-                            ?.commit()
-                    } else {
-                        Log.d("AdminQuestionRegister", "Failed to delete question: ${response.code()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.d("AdminQuestionRegister", "Network request failed", t)
-                }
-            })
-    }
+//    private fun adminRegisterBtnClick(replyDto: ReplyDTO) {
+//        replyDto.bid = bid
+//        replyDto.brcontent = content
+//        replyDto.nickname = nickname.toString()
+//        replyDto.id = id
+//
+//        val retrofit = AdminClient.retrofit
+//
+//        retrofit.create(IAdminService::class.java).postReplies(replyDto)
+//            .enqueue(object : Callback<ResponseBody> {
+//                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//                    if (response.code() == 200) {
+//                        Log.d("AdminQuestionRegister", "저장 200: ${response.body()}")
+//                        Toast.makeText(requireContext(), "답변등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+//                        adminRegisterComplete(bid)
+//                        val adminQuestion = AdminQuestion.newInstance()
+//                        fragmentManager?.beginTransaction()
+//                            ?.replace(R.id.container_admin, adminQuestion)
+//                            ?.addToBackStack(null)
+//                            ?.commit()
+//                    } else {
+//                        Log.d("AdminQuestionRegister", "Failed to delete question: ${response.code()}")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                    Log.d("AdminQuestionRegister", "Network request failed", t)
+//                }
+//            })
+//    }
 
     //문의사항 완료
     private fun adminRegisterComplete(bid: Int) {

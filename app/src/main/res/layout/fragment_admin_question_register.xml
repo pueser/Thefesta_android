@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:inputType="textMultiLine"
-                android:hint="1000자까지 입력해주세요"
+                android:hint="150자까지 입력해주세요"
                 android:background="@null"/>
 
         </com.google.android.material.textfield.TextInputLayout>
