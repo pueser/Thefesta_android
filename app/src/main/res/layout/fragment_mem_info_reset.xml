@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="370px"
-    tools:context=".member.PwReset">
+    android:layout_marginTop="320px"
+    tools:context=".member.MemInfoReset">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +15,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="비밀번호 재설정"
+            android:text="회원정보 수정"
             android:textSize="30sp"
             android:paddingTop="3dp"
-            android:layout_marginBottom="50px"
-            android:gravity="center"
+            android:layout_marginBottom="10px"
             android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/pwResetId"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이메일" />
+            android:layout_height="2dp"
+            android:background="#000"
+            android:layout_below="@id/gotoSignUp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
-            android:id="@+id/pwResetIdError"
+            android:id="@+id/memInfoResetId"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:hint="아이디" />
+
+        <TextView
+            android:id="@+id/idError"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
@@ -42,28 +50,37 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/pwResetVerificationCode"
-                android:layout_width="420px"
+                android:id="@+id/memInfoResetNickname"
+                android:layout_width="710px"
                 android:layout_height="wrap_content"
-                android:hint="인증번호" />
+                android:hint="닉네임" />
 
             <Button
-                android:id="@+id/pwResetVerificationCodeSend"
-                android:layout_width="345px"
+                android:id="@+id/memInfoResetNicknameCheck"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="인증번호 전송"
+                android:text="중복체크"
                 android:layout_marginLeft="15px"/>
 
-            <Button
-                android:id="@+id/pwResetVerificationCodeCheck"
-                android:layout_width="200px"
-                android:layout_height="wrap_content"
-                android:text="확인"
-                android:layout_marginLeft="15px"/>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/pwResetVerificationCodeError"
+            android:id="@+id/memInfoResetNicknameError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:paddingTop="3dp" />
+
+        <EditText
+            android:id="@+id/memInfoResetOriginalPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="현재 비밀번호" />
+
+        <TextView
+            android:id="@+id/memInfoResetOriginalPasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
@@ -71,14 +88,14 @@
             android:paddingTop="3dp" />
 
         <EditText
-            android:id="@+id/pwResetPassword"
+            android:id="@+id/memInfoResetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="새 비밀번호" />
 
         <TextView
-            android:id="@+id/pwResetPasswordError"
+            android:id="@+id/memInfoResetPasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
@@ -86,14 +103,14 @@
             android:paddingTop="3dp" />
 
         <EditText
-            android:id="@+id/pwResetRePassword"
+            android:id="@+id/memInfoResetRePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="비밀번호 확인" />
+            android:hint="새 비밀번호 확인" />
 
         <TextView
-            android:id="@+id/pwResetRePasswordError"
+            android:id="@+id/memInfoResetRePasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
@@ -107,13 +124,13 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/pwResetButton"
+                android:id="@+id/memInfoResetButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="확인" />
+                android:text="저장" />
 
             <Button
-                android:id="@+id/pwResetCencelButton"
+                android:id="@+id/memInfoResetCencelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="취소"
@@ -121,5 +138,6 @@
 
         </LinearLayout>
     </LinearLayout>
+
 
 </FrameLayout>

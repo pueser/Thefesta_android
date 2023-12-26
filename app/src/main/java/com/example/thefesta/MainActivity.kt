@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.thefesta.bottomnavi.Board
 import com.example.thefesta.bottomnavi.Festival
 import com.example.thefesta.bottomnavi.Scheduler
+import com.example.thefesta.bottomnavi.User
 import com.example.thefesta.databinding.ActivityMainBinding
 import com.example.thefesta.member.Login
-import com.example.thefesta.member.MyPage
 import com.example.thefesta.member.Util.PreferenceUtil
 import com.example.thefesta.permissioncheck.PermissionUtil
 import com.example.thefesta.retrofit.MemberClient
@@ -119,9 +119,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         return@setOnItemSelectedListener true
                     } else {
-                        val myPageFragment = MyPage()
+                        val userFragment = User()
                         with(supportFragmentManager.beginTransaction()) {
-                            replace(R.id.container, myPageFragment)
+                            replace(R.id.container, userFragment)
                             commit()
                         }
                         return@setOnItemSelectedListener true

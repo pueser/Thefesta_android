@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -25,10 +26,13 @@ import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.databinding.FragmentMyPageBinding
+import com.example.thefesta.databinding.FragmentUserBinding
+import com.example.thefesta.member.MemInfoReset
 import com.example.thefesta.member.Withdrawal
 import com.example.thefesta.model.member.MemberDTO
 import com.example.thefesta.retrofit.MemberClient
 import com.example.thefesta.service.IMemberService
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -41,16 +45,16 @@ import java.util.Date
 
 class User : Fragment() {
 
-    private lateinit var binding: FragmentMyPageBinding
+    private lateinit var binding: FragmentUserBinding
     private lateinit var memberService: IMemberService
     private lateinit var userImageView: ImageView
     private lateinit var nicknameTextView: TextView
+    private lateinit var floatingActionButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Activity를 바로 못불러 오기 때문에 bundle 사용
         arguments?.let {
-
         }
     }
 
@@ -59,16 +63,73 @@ class User : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         memberService = MemberClient.retrofit.create(IMemberService::class.java)
-        binding = FragmentMyPageBinding.inflate(inflater, container, false)
+        binding = FragmentUserBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.withdrawal.setOnClickListener {
+        floatingActionButton = view.findViewById(R.id.floatingbtn)
+
+        floatingActionButton.setOnClickListener {
+            showPopupMenu(it)
+        }
+
+        // 좋아요
+        binding.LikeListImg.setOnClickListener {
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
             transaction.replace(R.id.container, Withdrawal())
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
+        binding.LikeListBtn.setOnClickListener {
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.container, Withdrawal())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        // 톡톡
+        binding.talktalkImg.setOnClickListener {
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.container, MemInfoReset())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        binding.talktalkBtn.setOnClickListener {
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.container, MemInfoReset())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         return view
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.inflate(R.menu.user_menu)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_item1 -> {
+                    val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                    transaction.replace(R.id.container, MemInfoReset())
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                    true
+                }
+                R.id.menu_item2 -> {
+                    val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                    transaction.replace(R.id.container, Withdrawal())
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

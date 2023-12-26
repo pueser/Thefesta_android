@@ -2,6 +2,8 @@ package com.example.thefesta.member
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,8 +47,42 @@ class Login : Fragment() {
         val saveIdCheckBox: CheckBox = view.findViewById(R.id.saveIdCheckBox)
         val isCheckBoxChecked = MainActivity.prefs.getString("saveIdCheckBox", "")
         val idRemember = MainActivity.prefs.getString("idRemember", "")
+        val idErrorTextView: TextView = view.findViewById(R.id.loginIdError)
+        val passwordErrorTextView: TextView = view.findViewById(R.id.loginPasswordError)
 
         memberService = MemberClient.retrofit.create(IMemberService::class.java)
+
+        idEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!charSequence.isNullOrEmpty()) {
+                    idErrorTextView.text = ""
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+        })
+
+        passwordEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!charSequence.isNullOrEmpty()) {
+                    passwordErrorTextView.text = ""
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+
+            }
+        })
 
         if (isCheckBoxChecked == "1") {
             saveIdCheckBox.isChecked = true
@@ -55,12 +91,13 @@ class Login : Fragment() {
             saveIdCheckBox.isChecked = false
         }
 
+        // 회원가입 버튼
         val onSignUpClick: TextView = view.findViewById(R.id.gotoSignUp)
 
         onSignUpClick.setOnClickListener {
-            val fragmentJoin = Join()
+            val fragmentAgreementPage = AgreementPage()
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.container, fragmentJoin)
+            transaction.replace(R.id.container, fragmentAgreementPage)
             transaction.commit()
         }
 
@@ -74,6 +111,7 @@ class Login : Fragment() {
             transaction.commit()
         }
 
+        // 아이디 저장
         saveIdCheckBox.setOnCheckedChangeListener { _, isChecked ->
             Log.d("FragmentLogin", "isChek : $isCeck")
             if (isChecked) {
@@ -88,9 +126,24 @@ class Login : Fragment() {
 
         }
 
+        // 로그인 버튼
         loginButton.setOnClickListener {
             val id = idEditText.text.toString()
             val password = passwordEditText.text.toString()
+
+            if (id.isEmpty()) {
+                val errorMessage = "*아이디를 입력해주세요."
+                val errorTextView: TextView = view.findViewById(R.id.loginIdError)
+                errorTextView.text = errorMessage
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty()) {
+                val errorMessage = "*비밀번호를 입력해주세요."
+                val errorTextView: TextView = view.findViewById(R.id.loginPasswordError)
+                errorTextView.text = errorMessage
+                return@setOnClickListener
+            }
 
             val mDto = MemberDTO(id, "", password, "", "", null, null, null, null, null, null)
 

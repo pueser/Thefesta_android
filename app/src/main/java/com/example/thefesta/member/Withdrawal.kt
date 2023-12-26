@@ -2,6 +2,8 @@ package com.example.thefesta.member
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,14 +39,53 @@ class Withdrawal : Fragment() {
         val withdrawalCencelButton: Button = view.findViewById(R.id.withdrawalCencelButton)
 
         memberService = MemberClient.retrofit.create(IMemberService::class.java)
+
+        idEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!charSequence.isNullOrEmpty()) {
+                    val errorTextView: TextView? = view?.findViewById(R.id.withdrawalIdError)
+                    errorTextView?.text = ""
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+            }
+        })
+
+        passwordEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!charSequence.isNullOrEmpty()) {
+                    val errorTextView: TextView? = view?.findViewById(R.id.withdrawalPasswordError)
+                    errorTextView?.text = ""
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+            }
+        })
+
         withdrawalButton.setOnClickListener {
             val id = idEditText.text.toString()
             val password = passwordEditText.text.toString()
 
-            if (id != loginInfo) {
-                val errorMessage = "*아이디가 일치하지 않습니다."
-                val errorTextView: TextView = view.findViewById(R.id.withdrawalIdError)
-                errorTextView.text = errorMessage
+            if (id.isEmpty()) {
+                val errorMessage = "아이디를 입력해주세요."
+                val errorTextView: TextView? = view?.findViewById(R.id.withdrawalIdError)
+                errorTextView?.text = errorMessage
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty()) {
+                val errorMessage = "비밀번호를 입력해주세요."
+                val errorTextView: TextView? = view?.findViewById(R.id.withdrawalPasswordError)
+                errorTextView?.text = errorMessage
+                return@setOnClickListener
             }
 
             if (id != null && password.isNotEmpty()) {
@@ -100,6 +141,7 @@ class Withdrawal : Fragment() {
         joinCall.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
+                    MainActivity.prefs.setString("id", "")
                 }
             }
 

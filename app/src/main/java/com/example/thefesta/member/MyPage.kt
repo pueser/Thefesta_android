@@ -67,6 +67,14 @@ class MyPage : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
+        binding.memInfoReset.setOnClickListener {
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.container, MemInfoReset())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         return view
     }
 

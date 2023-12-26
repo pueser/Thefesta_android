@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="500px"
     tools:context=".member.Withdrawal">
 
     <LinearLayout
@@ -10,6 +11,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="회원탈퇴"
+            android:textSize="30sp"
+            android:paddingTop="3dp"
+            android:layout_marginBottom="50px"
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/withdrawalId"
@@ -42,8 +53,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="150px"
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/withdrawalButton"
@@ -55,8 +67,30 @@
                 android:id="@+id/withdrawalCencelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="취소" />
+                android:text="취소"
+                android:layout_marginLeft="15px" />
+
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25px"
+            android:textColor="#9E9E9E"
+            android:text="*개인정보는 6개월간 보관됩니다."
+            android:layout_marginTop="40px"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25px"
+            android:textColor="#9E9E9E"
+            android:text="*본인이 작성한 게시물, 댓글은 삭제되지 않습니다." />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25px"
+            android:textColor="#9E9E9E"
+            android:text="*동일한 아이디로 재가입은 일주일 후에 가능합니다. ." />
     </LinearLayout>
 
 </FrameLayout>
