@@ -82,6 +82,7 @@ class ReplyHolder(val binding: FestivalReplyItmeBinding,
         if (id != "" && id.equals(reply.id)) {
             binding.festivalReplyDeleteBtn.visibility = View.VISIBLE
             binding.festivalReplyModifyBtn.visibility = View.VISIBLE
+            binding.festivalReplyReportBtn.visibility = View.GONE
         } else {
             binding.festivalReplyDeleteBtn.visibility = View.GONE
             binding.festivalReplyModifyBtn.visibility = View.GONE
@@ -159,6 +160,7 @@ class ReplyHolder(val binding: FestivalReplyItmeBinding,
     }
 
     private fun formatDate(date: String?): String {
+        // 날짜 형식이 맞다고 가정하고 특별한 포맷이 필요 없을 경우에는 그냥 반환
         return date ?: ""
     }
 }

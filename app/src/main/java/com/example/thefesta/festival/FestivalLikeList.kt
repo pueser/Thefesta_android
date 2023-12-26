@@ -62,6 +62,7 @@ class FestivalLikeList : Fragment() {
                     Log.d("FestivalLikeList", "좋아요 목록 가져오기 성공")
                     val likeListResponse: FestivalLikeListResponse? = response.body()
                     val likeList: List<LikeDTO>? = likeListResponse?.list
+                    val pageMaker: PageDTO? = likeListResponse?.pageMaker
                     Log.d("FestivalLikeList", "좋아요 목록 : ${likeList}")
                     Log.d("FestivalLikeList", "페이지 : ${likeListResponse?.pageMaker}")
 
@@ -134,6 +135,10 @@ class FestivalLikeList : Fragment() {
                         Log.d("FestivalLikeList", "likeListSize : ${likeListSize}")
                         binding.replyRecyclerView.visibility = View.VISIBLE
                         binding.likeListEmpty.visibility = View.GONE
+                    }
+
+                    if (pageMaker != null) {
+                        binding.totalLike.text = "총 ${pageMaker.total}건"
                     }
                 } else {
                     Log.d("FestivalLikeList", "좋아요 목록 가져오기 실패")

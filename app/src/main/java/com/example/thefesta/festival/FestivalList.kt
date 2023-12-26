@@ -2,13 +2,16 @@ package com.example.thefesta.festival
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +21,9 @@ import com.example.thefesta.databinding.FragmentFestivalListBinding
 import com.example.thefesta.model.festival.AreacodeDTO
 import com.example.thefesta.model.festival.FestivalItemDTO
 import com.example.thefesta.model.festival.FestivalResponse
+import com.example.thefesta.model.festival.FestivalViewModel
 import com.example.thefesta.model.festival.LikeDTO
+import com.example.thefesta.model.festival.PageDTO
 import com.example.thefesta.retrofit.FestivalClient
 import com.example.thefesta.service.IFestivalService
 import retrofit2.Call
@@ -32,9 +37,11 @@ class FestivalList : Fragment() {
     private val customAdapter = FestivalCustomAdapter()
     private lateinit var paginationLayout: LinearLayout
     private var page = 1
+    private var total = 1
     private var isLoading = false
     private var isLastPage = false
     private val id = MainActivity.prefs.getString("id", "")
+    private val festivalViewModel: FestivalViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,30 +55,36 @@ class FestivalList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+        val layoutManager = GridLayoutManager(requireContext(), 2) // 한 줄에 2개의 아이템을 나열
         layoutManager.orientation = GridLayoutManager.VERTICAL
 
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = customAdapter
 
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val lastVisibleItemPosition =
-                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+        // 페이지네이션을 담을 LinearLayout 초기화
+        paginationLayout = view.findViewById(R.id.festivalListPaginationLayout)
 
-                val totalCount = customAdapter?.itemCount?.minus(1)
+        // 초기에 첫 번째 페이지를 불러옵니다.
+//        fetchData(page = 1)
 
-                if (lastVisibleItemPosition == totalCount) {
-                    loadNextPage()
-                }
-            }
-        })
+        if (festivalViewModel.currentPage != null) {
+            page = festivalViewModel.currentPage
+        } else {
+            // 초기 페이지 설정
+            page = 1
+        }
 
-        fetchData(page = 1)
+        fetchData(page)
 
         initSearchView()
-        
+
+        createAndAddButton("이전", page - 1) {
+            if (page > 1) {
+                loadPage(page - 1)
+            }
+        }
+
+        // 임시 좋아요 리스트
         binding.likeList.setOnClickListener {
             val festivalLikeListFragment = FestivalLikeList.newInstance()
             requireActivity().supportFragmentManager.beginTransaction()
@@ -97,22 +110,82 @@ class FestivalList : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+
                 return true
             }
         })
     }
 
-    private fun loadNextPage() {
-        page++
-        fetchData(page = page, keyword = binding.search.query.toString())
+    private fun loadPage(page: Int) {
+        fetchData(page, keyword = binding.search.query.toString())
+    }
+
+    // 페이징 버튼 생성 및 추가를 위한 메서드
+    private fun createAndAddButton(text: String, targetPage: Int, onClickListener: () -> Unit) {
+        val button = Button(requireContext())
+        button.text = text
+        button.setOnClickListener { onClickListener.invoke() }
+
+        // 버튼 크기 직접 지정
+        val layoutParams = LinearLayout.LayoutParams(100, 100)
+
+        // 마지막 버튼이 아닌 경우에만 마진 적용
+        if (paginationLayout.childCount < total) {
+            layoutParams.setMargins(0, 0, 30, 0)  // 원하는 마진 값으로 수정
+        }
+
+        button.layoutParams = layoutParams
+
+        // 버튼의 글씨 크기 설정
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)  // 원하는 크기로 수정
+
+        // 백그라운드 설정
+        if (page == targetPage) {
+            // 현재 페이지일 때 다른 백그라운드 적용 (예: drawable/festival_current_page_btn.xml)
+            button.setBackgroundResource(R.drawable.festival_pagination_sel_btn)
+        } else {
+            // 다른 페이지일 때의 백그라운드 적용 (예: drawable/festival_pagination_btn.xml)
+            button.setBackgroundResource(R.drawable.festival_pagination_btn)
+        }
+
+        paginationLayout.addView(button)
+    }
+
+    private fun handlePageChange(targetPage: Int) {
+        page = targetPage
+        festivalViewModel.currentPage = targetPage
+        // 페이지 변경 시 동작을 정의합니다.
+        fetchData(targetPage, keyword = binding.search.query.toString())
+    }
+
+    private fun setupPagination(pageMaker: PageDTO?) {
+        paginationLayout.removeAllViews()
+
+        pageMaker?.let {
+            if (pageMaker.prev) {
+                // "이전" 버튼 추가
+                createAndAddButton("<", 0) { handlePageChange(it.startPage - 1) }
+            }
+
+            // 페이지 번호 버튼 추가
+            for (num in it.startPage..it.endPage) {
+                createAndAddButton(num.toString(), num) { handlePageChange(num) }
+            }
+
+            if (pageMaker.next) {
+                // "다음" 버튼 추가
+                createAndAddButton(">", 0) { handlePageChange(it.endPage + 1) }
+            }
+        }
     }
 
     private fun fetchData(page: Int, keyword: String? = null) {
+        Log.d("ddddddf", "page : ${page}, currentPage : ${festivalViewModel.currentPage}")
         isLoading = true
         setLoading(true)
 
         val call: Call<FestivalResponse> =
-            festivalService.getFestivalList(pageNum = page, amount = 9, keyword = keyword)
+            festivalService.getFestivalList(pageNum = page, amount = 10, keyword = keyword)
 
         call.enqueue(object : Callback<FestivalResponse> {
             override fun onResponse(
@@ -128,16 +201,18 @@ class FestivalList : Fragment() {
                         customAdapter.setAreaCodeListCustom(areaCodeList)
                     }
 
-                    festivalList?.let {
-                        if (keyword != null) {
-                            Log.d("festivalList", "${festivalList}")
-                            Log.d("festivalList", "total : ${festivalResponse.pageMaker.total}")
-                            customAdapter.addFestivalList(it, keyword)
-                        } else {
-                            customAdapter.addFestivalList(it)
-                            customAdapter.notifyDataSetChanged()
+                    if (festivalList != null) {
+                        if (festivalList.size <= 0){
+                            binding.searchResult.visibility = View.VISIBLE
                         }
                     }
+
+                    total = festivalResponse?.pageMaker?.total ?:1
+
+                    updateFestivalList(festivalResponse)
+                    setupPagination(festivalResponse?.pageMaker)
+
+                    // 마지막 페이지 여부 체크
                     festivalResponse?.let {
                         isLastPage = it.pageMaker?.endPage == it.pageMaker?.realEnd
                     }
@@ -234,7 +309,11 @@ class FestivalList : Fragment() {
     }
 
     private fun updateFestivalList(festivalResponse: FestivalResponse?) {
-        customAdapter.festivalList = festivalResponse?.list as MutableList<FestivalItemDTO>?
+        if (festivalResponse != null) {
+            Log.d("dfdf", "${festivalResponse.list}")
+            Log.d("dfdf", "${festivalResponse.list?.size}")
+        }
+        customAdapter.festivalList = festivalResponse?.list
         customAdapter.notifyDataSetChanged()
     }
 

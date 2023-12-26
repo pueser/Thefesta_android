@@ -2,53 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/festivalReplyUserImg"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/noimage"
-            android:scaleType="centerCrop"/>
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:id="@+id/festivalReplyUserImg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/noimage"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/festivalReplyUserNick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="닉네임"/>
+            android:fontFamily="@font/notobold"
+            android:text="닉네임"
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/festivalReplyContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="댓글 내용"/>
+        android:fontFamily="@font/notoregular"
+        android:text="댓글 내용"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/festivalReplyModifyInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notoregular"
         android:text="댓글 내용"
-        android:background="@android:color/transparent"
-        android:visibility="gone"/>
+        android:textSize="16sp"
+        android:background="@drawable/festival_btn"
+        android:visibility="gone"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="top"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/festivalReplyDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/notoregular"
             android:text="2023.12.21"
-            android:gravity="start"/>
+            android:textSize="12sp"
+            android:textColor="#808080"
+            android:gravity="start"
+            android:includeFontPadding="false"/>
 
         <LinearLayout
             android:id="@+id/festivalReplyBtn"
@@ -56,38 +80,78 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end">
-            <Button
+            <android.widget.Button
                 android:id="@+id/festivalReplyModifyBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="수정"/>
-            <Button
+                android:text="수정"
+                android:textSize="10sp"
+                android:background="@drawable/festival_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:fontFamily="@font/notoregular"
+                android:gravity="center"
+                android:layout_marginRight="5dp"/>
+            <android.widget.Button
                 android:id="@+id/festivalReplyDeleteBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="삭제"/>
-            <Button
+                android:text="삭제"
+                android:textSize="10sp"
+                android:background="@drawable/festival_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:fontFamily="@font/notoregular"
+                android:gravity="center"
+                android:layout_marginRight="5dp"/>
+            <android.widget.Button
                 android:id="@+id/festivalReplyReportBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:text="신고"/>
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:fontFamily="@font/notoregular"
+                android:gravity="center"
+                android:text="신고"
+                android:textSize="10sp"
+                android:background="@drawable/festival_btn"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/festivalReplyModifySubmitBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="저장"/>
-            <Button
+                android:text="저장"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:background="@drawable/festival_positive_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:fontFamily="@font/notoregular"
+                android:gravity="center"
+                android:layout_marginRight="5dp"/>
+            <android.widget.Button
                 android:id="@+id/festivalReplyModifyCancelBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="취소"/>
+                android:text="취소"
+                android:textSize="10sp"
+                android:textColor="#ff4949"
+                android:background="@drawable/festival_negative_btn"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:fontFamily="@font/notoregular"
+                android:gravity="center"/>
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e9e9e9"/>
 
 </LinearLayout>

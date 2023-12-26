@@ -4,22 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="start"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:layout_marginTop="100dp"
+    android:background="#fff"
     tools:context=".festival.FestivalReplyReport">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notobold"
+        android:includeFontPadding="false"
         android:text="댓글 신고"
-        android:gravity="center"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:paddingLeft="5dp"
         android:layout_marginBottom="20dp"/>
 
     <EditText
         android:id="@+id/festivalReplyReportInput"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:hint="신고 내용을 입력하세요."
-        android:background="@android:color/transparent"
+        android:background="@drawable/festival_btn"
+        android:padding="10dp"
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
@@ -27,16 +36,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
-        <Button
+        <android.widget.Button
             android:id="@+id/festivalReplyReportSubmitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="신고"/>
-        <Button
+            android:text="신고"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            android:textColor="#ff4949"
+            android:background="@drawable/festival_negative_btn"/>
+        <android.widget.Button
             android:id="@+id/festivalReplyReportCancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="취소"/>
+            android:text="취소"
+            android:textSize="16sp"
+            android:background="@drawable/festival_positive_btn"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -5,8 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object FestivalClient {
-    private const val BASE_URL = "http://192.168.0.14:9090/"
-//    private const val BASE_URL = "http://192.168.4.21:9090/"
+    private const val BASE_URL = "http://192.168.4.25:9090/"
 
     val gson = GsonBuilder().setLenient().create()
 

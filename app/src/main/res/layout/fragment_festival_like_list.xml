@@ -5,7 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".festival.FestivalLikeList"
     android:layout_marginTop="80dp"
-    android:layout_marginBottom="100dp">
+    android:layout_marginBottom="100dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="#fff">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,12 +16,50 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="좋아요"/>
+            android:fontFamily="@font/notobold"
+            android:includeFontPadding="false"
+            android:text="좋아요"
+            android:textSize="18sp"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:layout_marginBottom="10dp"/>
 
-        <CheckBox
-            android:id="@+id/likeListAllCheckBox"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/likeListAllCheckBox"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/totalLike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:includeFontPadding="false"
+                android:gravity="end"
+                android:text="종 좋아요 수"
+                android:textSize="14sp"
+                android:layout_marginRight="15dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#808080"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/replyRecyclerView"
@@ -38,20 +79,28 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+            <android.widget.Button
                 android:id="@+id/likeListAllCheckBtn"
-                android:layout_width="100dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notobold"
                 android:text="전체선택"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:padding="0dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/festival_positive_btn"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/likeListDeleteBtn"
-                android:layout_width="100dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notobold"
                 android:text="삭제"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:textColor="#ff4949"
+                android:background="@drawable/festival_negative_btn"/>
         </LinearLayout>
 
         <LinearLayout

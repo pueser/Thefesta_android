@@ -22,7 +22,7 @@ class FestivalCustomAdapter: RecyclerView.Adapter<FestivalHolder>() {
     private val festivalService: IFestivalService =
         FestivalClient.retrofit.create(IFestivalService::class.java)
     private var lastKeyword: String? = null
-    var festivalList: MutableList<FestivalItemDTO>? = mutableListOf()
+    var festivalList: List<FestivalItemDTO>? = listOf()
     var areaCodeList: List<AreacodeDTO>? = null
     private val id = MainActivity.prefs.getString("id", "")
 
@@ -80,33 +80,27 @@ class FestivalCustomAdapter: RecyclerView.Adapter<FestivalHolder>() {
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     if (response.isSuccessful) {
                         val result: Int? = response.body()
+                        // result가 1이면 좋아요가 되어 있음
                         val likeImageResource = if (result == 1) {
-                            R.drawable.selstar
+                            R.drawable.selstar // 좋아요가 눌려진 상태의 이미지 리소스
                         } else {
-                            R.drawable.star
+                            R.drawable.star // 좋아요가 눌려지지 않은 상태의 이미지 리소스
                         }
                         if (holder.adapterPosition != RecyclerView.NO_POSITION) {
                             holder.binding.likeBtn.setImageResource(likeImageResource)
                             festivalList?.get(holder.adapterPosition)?.likeStatus = (result == 1)
                         }
                     } else {
+                        // 실패 시 기본 이미지 설정
                         holder.binding.likeBtn.setImageResource(R.drawable.star)
                     }
                 }
 
                 override fun onFailure(call: Call<Int>, t: Throwable) {
+                    // 실패 시 기본 이미지 설정
                     holder.binding.likeBtn.setImageResource(R.drawable.star)
                 }
             })
-    }
-
-    fun addFestivalList(newList: List<FestivalItemDTO>, keyword: String? = null) {
-        if (!keyword.isNullOrEmpty() && keyword != lastKeyword) {
-            festivalList?.clear()
-            lastKeyword = keyword
-        }
-        festivalList?.addAll(newList)
-        notifyDataSetChanged()
     }
 
     fun toggleLikeState(position: Int) {
@@ -142,6 +136,7 @@ class FestivalHolder(val binding: FestivalItemBinding, private val likeButtonCli
                         binding.scode.text = if (areaCode.acode == 8 && areaCode.scode == 1) "" else areaCode.sname
                     }
                 }
+
             } else {
                 binding.scode.text = "정보 없음"
             }
@@ -155,12 +150,15 @@ class FestivalHolder(val binding: FestivalItemBinding, private val likeButtonCli
             if (startDate > today) {
                 binding.festivalState.text = "축제 예정"
                 binding.festivalState.setTextColor(Color.parseColor("#808080"))
+                binding.festivalState.setBackgroundResource(R.drawable.festival_upcoming)
             } else if (startDate < today && endDate > today) {
                 binding.festivalState.text = "축제 진행 중"
                 binding.festivalState.setTextColor(Color.parseColor("#0066ff"))
+                binding.festivalState.setBackgroundResource(R.drawable.festival_ongoing)
             } else if (startDate < today && endDate < today) {
                 binding.festivalState.text = "축제 종료"
                 binding.festivalState.setTextColor(Color.parseColor("#c0392b"))
+                binding.festivalState.setBackgroundResource(R.drawable.festival_completed)
             }
 
 
@@ -169,13 +167,11 @@ class FestivalHolder(val binding: FestivalItemBinding, private val likeButtonCli
             }
 
             val likeImageResource = if (festival.likeStatus) {
-                R.drawable.selstar
+                R.drawable.selstar // 좋아요가 눌려진 상태의 이미지 리소스
             } else {
-                R.drawable.star
+                R.drawable.star // 좋아요가 눌려지지 않은 상태의 이미지 리소스
             }
             binding.likeBtn.setImageResource(likeImageResource)
         }
     }
-
-
 }
