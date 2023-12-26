@@ -70,15 +70,17 @@
                 android:maxLines="1"/>
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/questionRegister"
                 android:layout_width="0.0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/admin_rectangle_button"
+                android:fontFamily="@font/notobold"
+                android:textColor="@color/black"
+                android:background="@drawable/festival_positive_btn"
                 android:onClick="deleteClick"
                 android:text="답변"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textAlignment="center"/>
         </TableRow>
     </TableLayout>

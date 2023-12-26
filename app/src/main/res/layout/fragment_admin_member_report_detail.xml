@@ -45,22 +45,26 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|center_horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/adminMemberDetailReportApporveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="승인"
             android:onClick="cheackButtonClick"
             android:layout_marginRight="10dp"
-            android:background="@drawable/admin_rectangle_button"/>
+            android:fontFamily="@font/notobold"
+            android:textColor="#0066ff"
+            android:background="@drawable/festival_ongoing"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/adminMemberDetailReportDeleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="삭제"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/admin_rectangle_button"/>
+            android:textColor="#ff4949"
+            android:background="@drawable/festival_negative_btn"
+            android:onClick="deleteClick"/>
 
     </LinearLayout>
 

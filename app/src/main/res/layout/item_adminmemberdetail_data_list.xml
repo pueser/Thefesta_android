@@ -73,27 +73,33 @@
                 android:layout_marginRight="5dp"/>
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/approveBtn"
-                android:layout_width="0.0dp"
+                android:layout_width="0dp"
+                android:layout_marginRight="2dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/admin_rectangle_button"
+                android:fontFamily="@font/notobold"
+                android:textColor="#0066ff"
+                android:background="@drawable/festival_ongoing"
                 android:onClick="deleteClick"
-                android:text="확인"
-                android:textSize="10sp"
+                android:text="승인"
+                android:textSize="12sp"
                 android:textAlignment="center"
                 android:clickable="true"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/deleteBtn"
                 android:layout_width="0.0dp"
+                android:layout_marginLeft="2dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/admin_rectangle_button"
+                android:fontFamily="@font/notobold"
+                android:textColor="#ff4949"
+                android:background="@drawable/festival_negative_btn"
                 android:onClick="deleteClick"
-                android:text="확인"
-                android:textSize="10sp"
+                android:text="삭제"
+                android:textSize="12sp"
                 android:textAlignment="center"
                 android:clickable="true"/>
         </TableRow>

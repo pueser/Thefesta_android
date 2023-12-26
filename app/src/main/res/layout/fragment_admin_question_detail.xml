@@ -47,14 +47,16 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|center_horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/admin_QuestionDetailRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="답변하기"
             android:onClick="cheackButtonClick"
             android:layout_marginRight="10dp"
-            android:background="@drawable/admin_rectangle_button"/>
+            android:fontFamily="@font/notobold"
+            android:textColor="@color/black"
+            android:background="@drawable/festival_positive_btn"/>
 
 
     </LinearLayout>
