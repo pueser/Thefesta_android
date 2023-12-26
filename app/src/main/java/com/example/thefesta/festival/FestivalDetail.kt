@@ -33,6 +33,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
+import com.example.thefesta.admin.adminfesta.admin.AdminFestaQuestionRegister
 import com.example.thefesta.databinding.FragmentFestivalDetailBinding
 import com.example.thefesta.food.FoodList
 import com.example.thefesta.model.festival.FestivalImgItemDTO
@@ -190,6 +191,14 @@ class FestivalDetail : Fragment() {
                                 Toast.makeText(requireContext(), "회원만 댓글 등록이 가능합니다.", Toast.LENGTH_SHORT).show()
                             }
 
+                        }
+
+                        binding.festivalReport.setOnClickListener{
+                            val adminFestaQuestionRegisterFragment = AdminFestaQuestionRegister.newInstance(contentid, festivalInfo!!.title)
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, adminFestaQuestionRegisterFragment)
+                                .addToBackStack(null)
+                                .commit()
                         }
 
                     }
