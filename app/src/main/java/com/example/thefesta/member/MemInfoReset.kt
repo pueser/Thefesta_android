@@ -57,12 +57,23 @@ class MemInfoReset : Fragment() {
         var nickname = nicknameEditText.text.toString()
 
         nicknameEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
             }
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
                 if (!charSequence.isNullOrEmpty()) {
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetNicknameError)
                     errorTextView?.text = ""
                     nicknameChackResult = "fail"
                 }
@@ -73,12 +84,23 @@ class MemInfoReset : Fragment() {
         })
 
         passwordEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
             }
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
                 if (!charSequence.isNullOrEmpty()) {
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetPasswordError)
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetPasswordError)
                     errorTextView?.text = ""
                 }
             }
@@ -88,12 +110,38 @@ class MemInfoReset : Fragment() {
         })
 
         passwordReEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                charSequence: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                if (!charSequence.isNullOrEmpty()) {
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetRePasswordError)
+                    errorTextView?.text = ""
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+            }
+        })
+
+        originalPasswordEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!charSequence.isNullOrEmpty()) {
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetRePasswordError)
+                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetOriginalPasswordError)
                     errorTextView?.text = ""
                 }
             }
@@ -133,14 +181,18 @@ class MemInfoReset : Fragment() {
         })
 
         memInfoResetNicknameCheck.setOnClickListener {
+            val id = ""
             val nickname = nicknameEditText.text.toString()
             Log.d("FragmentMemInfoReset", "$nickname")
+
+            val mDto = MemberDTO(id, nickname)
 
             if (nickname != "") {
 
                 if (nickname.length > 10) {
                     val errorMessage = "*닉네임은 최대 10글자까지 입력 가능합니다."
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetNicknameError)
                     errorTextView?.text = errorMessage
                     return@setOnClickListener
                 }
@@ -149,12 +201,13 @@ class MemInfoReset : Fragment() {
                 if (!koreanRegex.matches(nickname)) {
                     Log.d("FragmentMemInfoReset", "여기")
                     val errorMessage = "*한글로 된 닉네임만 사용 가능합니다."
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetNicknameError)
                     errorTextView?.text = errorMessage
                     return@setOnClickListener
                 }
-                val call: Call<String> = memberService.nicknameCheck(mDto)
 
+                val call: Call<String> = memberService.nicknameCheck(mDto)
                 call.enqueue(object : Callback<String> {
                     override fun onResponse(call: Call<String>, response: Response<String>) {
                         if (response.isSuccessful) {
@@ -165,6 +218,7 @@ class MemInfoReset : Fragment() {
                                     val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
                                     errorTextView?.text = errorMessage
                                     nicknameChackResult = "success"
+
                                 } else if (result == "fail") {
                                     val errorMessage = "사용중인 닉네임입니다. 다시 입력해주세요."
                                     val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
@@ -175,7 +229,8 @@ class MemInfoReset : Fragment() {
                     }
 
                     override fun onFailure(call: Call<String>, t: Throwable) {
-                        Log.e("FragmentMemInfoReset", "Retrofit onFailure: ${t.message}", t)
+                        Log.e("FragmentJoin", "여기 도착?")
+                        Log.e("FragmentJoin", "Retrofit onFailure: ${t.message}", t)
                     }
                 })
             }
@@ -194,7 +249,8 @@ class MemInfoReset : Fragment() {
 
                 if (nicknameChackResult == "fail") {
                     val errorMessage = "*중복체크를 진행해주세요."
-                    val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetNicknameError)
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetNicknameError)
                     errorTextView?.text = errorMessage
                     return@setOnClickListener
                 }
@@ -206,23 +262,35 @@ class MemInfoReset : Fragment() {
                 }
             }
 
-            val mDto = MemberDTO(id, nickname, password)
+            Log.d("FragmentMemInfoReset", "닉네임 통과 ${nickname}")
 
-            Log.d("FragmentMemInfoReset", "$nickname :after: $password")
+            if (originalPass != "") {
 
-            val originalPassword = originalPasswordEditText.text.toString()
-            Log.d("FragmentMemInfoReset", "$originalPassword : ${memInfo?.password}")
-            if (originalPass != memInfo!!.password) {
-                val errorMessage = "비밀번호가 일치하지 않습니다."
-                val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetOriginalPasswordError)
-                errorTextView?.text = errorMessage
-            } else {
+                val originalPassword = originalPasswordEditText.text.toString()
+                Log.d("FragmentMemInfoReset", "$originalPassword : ${memInfo?.password}")
+                if (originalPass != memInfo!!.password) {
+                    val errorMessage = "비밀번호가 일치하지 않습니다."
+                    val errorTextView: TextView? =
+                        view?.findViewById(R.id.memInfoResetOriginalPasswordError)
+                    errorTextView?.text = errorMessage
+                    return@setOnClickListener
+                } else {
+
+                    if (password == "") {
+                        if (password.isEmpty()) {
+                            val errorMessage = "*변경할 비밀번호를 입력해주세요."
+                            val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetPasswordError)
+                            errorTextView?.text = errorMessage
+                            return@setOnClickListener
+                        }
+                    }
 
                 if (password != "") {
 
                     if (password.length < 8 || password.length > 16) {
                         val errorMessage = "*비밀번호는 최소 8글자, 최대 16글자까지 입력할 수 있습니다."
-                        val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetPasswordError)
+                        val errorTextView: TextView? =
+                            view?.findViewById(R.id.memInfoResetPasswordError)
                         errorTextView?.text = errorMessage
                         return@setOnClickListener
                     }
@@ -231,36 +299,53 @@ class MemInfoReset : Fragment() {
                     val numberRegex = Regex("[0-9]")
                     val specialCharacterRegex = Regex("[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\/-]")
 
-                    if (!lowercaseRegex.containsMatchIn(password) || !numberRegex.containsMatchIn(password) || !specialCharacterRegex.containsMatchIn(password)) {
+                    if (!lowercaseRegex.containsMatchIn(password) || !numberRegex.containsMatchIn(
+                            password
+                        ) || !specialCharacterRegex.containsMatchIn(password)
+                    ) {
                         val errorMessage = "*비밀번호에는 소문자, 숫자, 특수문자가 한 자 이상 포함되어야 합니다."
-                        val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetPasswordError)
+                        val errorTextView: TextView? =
+                            view?.findViewById(R.id.memInfoResetPasswordError)
                         errorTextView?.text = errorMessage
                         return@setOnClickListener
                     }
 
                     if (passwordRe.isEmpty()) {
                         val errorMessage = "*비밀번호를 재입력해주세요."
-                        val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetRePasswordError)
+                        val errorTextView: TextView? =
+                            view?.findViewById(R.id.memInfoResetRePasswordError)
                         errorTextView?.text = errorMessage
                         return@setOnClickListener
                     }
 
                     if (password != passwordRe) {
                         val errorMessage = "*비밀번호와 일치하지 않습니다."
-                        val errorTextView: TextView? = view?.findViewById(R.id.memInfoResetRePasswordError)
+                        val errorTextView: TextView? =
+                            view?.findViewById(R.id.memInfoResetRePasswordError)
                         errorTextView?.text = errorMessage
                         return@setOnClickListener
                     }
-                }
-
-                if (password == "" || password == null) {
-                    memInfo?.let {
-                        password = it.password.toString()
+                    if (password == "" || password == null) {
+                        memInfo?.let {
+                            password = it.password.toString()
+                        }
                     }
                 }
-
+            }
+                Log.d("FragmentMemInfoReset", "$nickname :after: $password")
                 memInfoReset(mDto)
             }
+
+            if (password == "") {
+                memInfo?.let {
+                    password = it.password.toString()
+                }
+            }
+
+            val mDto = MemberDTO(id, nickname, password)
+
+            Log.d("FragmentMemInfoReset", "$nickname :after: $password")
+            memInfoReset(mDto)
         }
 
         memInfoResetCencelButton.setOnClickListener {
@@ -274,6 +359,7 @@ class MemInfoReset : Fragment() {
     }
 
     private fun memInfoReset(mDto: MemberDTO) {
+        Log.d("FragmentMemInfoReset", "${mDto.nickname}, ${mDto.password}")
         val joinCall: Call<String> = memberService.memInfoReset(mDto)
         joinCall.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {

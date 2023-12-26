@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.bottomnavi.Festival

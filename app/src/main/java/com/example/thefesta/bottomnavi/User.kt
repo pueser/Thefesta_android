@@ -27,6 +27,7 @@ import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.databinding.FragmentMyPageBinding
 import com.example.thefesta.databinding.FragmentUserBinding
+import com.example.thefesta.festival.FestivalLikeList
 import com.example.thefesta.member.MemInfoReset
 import com.example.thefesta.member.Withdrawal
 import com.example.thefesta.model.member.MemberDTO
@@ -75,14 +76,14 @@ class User : Fragment() {
         // 좋아요
         binding.LikeListImg.setOnClickListener {
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.container, Withdrawal())
+            transaction.replace(R.id.container, FestivalLikeList())
             transaction.addToBackStack(null)
             transaction.commit()
         }
 
         binding.LikeListBtn.setOnClickListener {
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.container, Withdrawal())
+            transaction.replace(R.id.container, FestivalLikeList())
             transaction.addToBackStack(null)
             transaction.commit()
         }
