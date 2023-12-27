@@ -22,6 +22,8 @@ class AdminFestaQuestionDetail : Fragment() {
     private var questionid: String = ""
     private var contentId: String = ""
 
+
+
     companion object {
         private const val ARG_questioncontent = "arg_questioncontent"
         private const val ARG_questionid = "arg_questionid"
@@ -55,7 +57,9 @@ class AdminFestaQuestionDetail : Fragment() {
         contentId = arguments?.getString(ARG_contentId).orEmpty()
 
         if (questioncontent.isNotBlank() && questionid.isNotBlank()) {
+            val truncatedQuestionId = questionid.toDouble().toInt().toString()
             binding.adminFestaDetailReportContent.text = questioncontent
+            binding.adminFestaDetailReport.text = "건의번호 : ${truncatedQuestionId}번"
         }
         //확인하기 버튼 클릭했을 때
         binding.adminFestaDetailCheackBtn.setOnClickListener {
@@ -63,6 +67,7 @@ class AdminFestaQuestionDetail : Fragment() {
         }
         //취소하기 버튼 클릭했을 때
         binding.adminFestaDetailCancleBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "취소되었습니다.", Toast.LENGTH_SHORT).show()
             val fragmentManager = requireActivity().supportFragmentManager
 
             val adminFestaQuestionFragment = AdminFestaQuestion.newInstance(contentId)
@@ -75,6 +80,7 @@ class AdminFestaQuestionDetail : Fragment() {
 
     private fun CheackBtnClick(questionId: String) {
         val retrofit = AdminClient.retrofit
+
 
         retrofit.create(IAdminService::class.java).postQuestionDelete(questionId)
             .enqueue(object : Callback<String> {

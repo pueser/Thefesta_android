@@ -1,4 +1,3 @@
-<!-- B번 코드를 A번 코드와 유사한 디자인으로 변경 -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

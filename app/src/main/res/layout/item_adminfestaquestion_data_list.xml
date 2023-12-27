@@ -60,17 +60,20 @@
                 android:layout_marginRight="5dp"/>
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/festaCheckBtn"
-                android:layout_width="0.0dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/admin_rectangle_button"
+                android:fontFamily="@font/notobold"
+                android:textColor="#0066ff"
+                android:background="@drawable/festival_ongoing"
                 android:onClick="deleteClick"
                 android:text="확인"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textAlignment="center"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:padding="0dp"/>
         </TableRow>
     </TableLayout>
 
