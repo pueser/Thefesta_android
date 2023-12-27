@@ -131,6 +131,12 @@ class Login : Fragment() {
             val id = idEditText.text.toString()
             val password = passwordEditText.text.toString()
 
+            val errorMessage = ""
+            val errorTextView1: TextView? = view?.findViewById(R.id.loginIdError)
+            val errorTextView2: TextView? = view?.findViewById(R.id.loginPasswordError)
+            errorTextView1?.text = errorMessage
+            errorTextView2?.text = errorMessage
+
             if (id.isEmpty()) {
                 val errorMessage = "*아이디를 입력해주세요."
                 val errorTextView: TextView = view.findViewById(R.id.loginIdError)

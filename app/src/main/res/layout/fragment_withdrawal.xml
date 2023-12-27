@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/withdrawalIdError"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="55px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/withdrawalPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="55px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
