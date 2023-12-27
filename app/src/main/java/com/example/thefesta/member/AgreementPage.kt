@@ -93,7 +93,7 @@ class AgreementPage : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-
+//
         return view
     }
 }

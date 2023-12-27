@@ -130,7 +130,7 @@ class Withdrawal : Fragment() {
             activity?.finish()
             Log.d("FragmentLogin", "메인으로 돌아옴!")
         }
-
+//
         return view
     }
 

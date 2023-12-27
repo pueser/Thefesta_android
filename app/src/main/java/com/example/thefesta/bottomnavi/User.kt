@@ -42,7 +42,7 @@ import retrofit2.Response
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
-
+//
 class User : Fragment() {
 
     private lateinit var binding: FragmentUserBinding
