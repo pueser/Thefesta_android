@@ -149,7 +149,7 @@ class MemInfoReset : Fragment() {
             override fun afterTextChanged(editable: Editable?) {
             }
         })
-
+//
         if (nickname == null || nickname == "") {
             nickname = memInfo?.nickname.toString()
         }

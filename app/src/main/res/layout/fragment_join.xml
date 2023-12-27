@@ -44,10 +44,9 @@
         <TextView
             android:id="@+id/joinIdError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="11sp"
-            android:paddingTop="3dp" />
+            android:textSize="11sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +71,7 @@
         <TextView
             android:id="@+id/joinNicknameError"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -106,7 +105,7 @@
         <TextView
             android:id="@+id/joinVerificationCodeError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -121,7 +120,7 @@
         <TextView
             android:id="@+id/joinPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -136,7 +135,7 @@
         <TextView
             android:id="@+id/joinRePasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -146,7 +145,7 @@
             android:layout_height="150px"
             android:orientation="horizontal"
             android:gravity="center">
-
+<!---->
             <Button
                 android:id="@+id/joinButton"
                 android:layout_width="wrap_content"
