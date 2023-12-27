@@ -326,7 +326,7 @@ class PwReset : Fragment() {
                     } else if (stateCode == "") {
                         Toast.makeText(requireContext(), "미가입 된 아이디입니다.", Toast.LENGTH_SHORT).show()
                         errorTextView?.text = errorMessage
-
+//
                     }
                 }
             }

@@ -156,7 +156,7 @@ class Login : Fragment() {
                         val memInfo: MemberDTO? = response.body()
 
                         Log.d("FragmentLogin", "memInfo: $memInfo")
-
+//
                         if (memInfo != null) {
                             MainActivity.prefs.setString("id", idEditText.text.toString())
                             when (memInfo.statecode) {

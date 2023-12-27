@@ -35,7 +35,7 @@
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
-
+<!---->
         <EditText
             android:id="@+id/withdrawalPassword"
             android:layout_width="match_parent"
