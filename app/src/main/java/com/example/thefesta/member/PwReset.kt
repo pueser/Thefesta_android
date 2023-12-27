@@ -153,6 +153,7 @@ class PwReset : Fragment() {
         pwResetVerificationCodeCheck.setOnClickListener {
             val id = idEditText.text.toString()
             val verificationCode = verificationCodeEditText.text.toString()
+            val mDto = MemberDTO(id)
 
             if (id.isEmpty()) {
                 val errorMessage = "*사용할 아이디를 입력해주세요."
@@ -160,6 +161,8 @@ class PwReset : Fragment() {
                 errorTextView?.text = errorMessage
                 return@setOnClickListener
             }
+
+            selMember(mDto)
 
             if (verificationCodeSendResult == "fail") {
                 val errorMessage = "*인증번호를 발급받아주세요."

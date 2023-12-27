@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.bottomnavi.Festival
@@ -612,6 +613,7 @@ class Join : Fragment() {
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
+                Toast.makeText(requireContext(), "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
@@ -634,6 +636,7 @@ class Join : Fragment() {
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
+                Toast.makeText(requireContext(), "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {

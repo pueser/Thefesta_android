@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/idError"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -67,7 +67,7 @@
         <TextView
             android:id="@+id/memInfoResetNicknameError"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -82,7 +82,7 @@
         <TextView
             android:id="@+id/memInfoResetOriginalPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -97,7 +97,7 @@
         <TextView
             android:id="@+id/memInfoResetPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -112,7 +112,7 @@
         <TextView
             android:id="@+id/memInfoResetRePasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />

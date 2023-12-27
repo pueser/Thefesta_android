@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/pwResetIdError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -65,7 +65,7 @@
         <TextView
             android:id="@+id/pwResetVerificationCodeError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -80,7 +80,7 @@
         <TextView
             android:id="@+id/pwResetPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -95,7 +95,7 @@
         <TextView
             android:id="@+id/pwResetRePasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />

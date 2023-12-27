@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/loginIdError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/loginPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -86,6 +86,7 @@
                 android:text="|"
                 android:layout_marginTop="15px"
                 android:layout_marginLeft="35px"/>
+
             <TextView
                 android:id="@+id/gotoForgotPassword"
                 android:layout_width="wrap_content"
