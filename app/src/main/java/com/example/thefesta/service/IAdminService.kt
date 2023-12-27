@@ -1,6 +1,7 @@
 package com.example.thefesta.service
 
 import com.example.thefesta.model.admin.QuestionDTO
+import com.example.thefesta.model.admin.ReplyDTO
 import com.example.thefesta.model.member.MemberDTO
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -174,10 +175,10 @@ interface IAdminService {
     ): Call<Map<String, Any>>
 
     //문의사항 답변
-//    @POST("replies/new")
-//    fun postReplies(
-//        @Body replyDto: ReplyDTO
-//    ): Call<ResponseBody>
+    @POST("replies/new")
+    fun postReplies(
+        @Body replyDto: ReplyDTO
+    ): Call<ResponseBody>
 
     //문의사항 완료
     @POST("admin/adminQuestionbstatecodeChange")

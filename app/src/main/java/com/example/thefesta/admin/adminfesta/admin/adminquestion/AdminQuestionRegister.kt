@@ -13,6 +13,7 @@ import com.example.thefesta.MainActivity
 import com.example.thefesta.R
 import com.example.thefesta.adminbottomnavi.AdminQuestion
 import com.example.thefesta.databinding.FragmentAdminQuestionRegisterBinding
+import com.example.thefesta.model.admin.ReplyDTO
 import com.example.thefesta.model.member.MemberDTO
 import com.example.thefesta.retrofit.AdminClient
 import com.example.thefesta.service.IAdminService
@@ -119,21 +120,21 @@ class AdminQuestionRegister : Fragment() {
         })
 
 
-//
-//        binding.adminRegisterBtn.setOnClickListener {
-//            content = binding.adminQuestionRegisterContent.text.toString()
-//            val replyDTO = ReplyDTO(
-//                brno = 0,
-//                brcontent = content,
-//                brregist = "",  // Replace with the appropriate value for brregist
-//                bredit = "",    // Replace with the appropriate value for bredit
-//                bid = bid,
-//                nickname = nickname ?: "", // Handle the null case for nickname
-//                id = id,
-//                brstatecode = "" // Replace with the appropriate value for brstatecode
-//            )
-//            adminRegisterBtnClick(replyDTO)
-//        }
+
+        binding.adminRegisterBtn.setOnClickListener {
+            content = binding.adminQuestionRegisterContent.text.toString()
+            val replyDTO = ReplyDTO(
+                brno = 0,
+                brcontent = content,
+                brregist = "",  // Replace with the appropriate value for brregist
+                bredit = "",    // Replace with the appropriate value for bredit
+                bid = bid,
+                nickname = nickname ?: "", // Handle the null case for nickname
+                id = id,
+                brstatecode = "" // Replace with the appropriate value for brstatecode
+            )
+            adminRegisterBtnClick(replyDTO)
+        }
 
         binding.adminCancelBtn.setOnClickListener {
             adminCancelBtnClick()
@@ -167,36 +168,36 @@ class AdminQuestionRegister : Fragment() {
 
 
     // 작성완료 버튼 클릭
-//    private fun adminRegisterBtnClick(replyDto: ReplyDTO) {
-//        replyDto.bid = bid
-//        replyDto.brcontent = content
-//        replyDto.nickname = nickname.toString()
-//        replyDto.id = id
-//
-//        val retrofit = AdminClient.retrofit
-//
-//        retrofit.create(IAdminService::class.java).postReplies(replyDto)
-//            .enqueue(object : Callback<ResponseBody> {
-//                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//                    if (response.code() == 200) {
-//                        Log.d("AdminQuestionRegister", "저장 200: ${response.body()}")
-//                        Toast.makeText(requireContext(), "답변등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-//                        adminRegisterComplete(bid)
-//                        val adminQuestion = AdminQuestion.newInstance()
-//                        fragmentManager?.beginTransaction()
-//                            ?.replace(R.id.container_admin, adminQuestion)
-//                            ?.addToBackStack(null)
-//                            ?.commit()
-//                    } else {
-//                        Log.d("AdminQuestionRegister", "Failed to delete question: ${response.code()}")
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                    Log.d("AdminQuestionRegister", "Network request failed", t)
-//                }
-//            })
-//    }
+    private fun adminRegisterBtnClick(replyDto: ReplyDTO) {
+        replyDto.bid = bid
+        replyDto.brcontent = content
+        replyDto.nickname = nickname.toString()
+        replyDto.id = id
+
+        val retrofit = AdminClient.retrofit
+
+        retrofit.create(IAdminService::class.java).postReplies(replyDto)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.code() == 200) {
+                        Log.d("AdminQuestionRegister", "저장 200: ${response.body()}")
+                        Toast.makeText(requireContext(), "답변등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        adminRegisterComplete(bid)
+                        val adminQuestion = AdminQuestion.newInstance()
+                        fragmentManager?.beginTransaction()
+                            ?.replace(R.id.container_admin, adminQuestion)
+                            ?.addToBackStack(null)
+                            ?.commit()
+                    } else {
+                        Log.d("AdminQuestionRegister", "Failed to delete question: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.d("AdminQuestionRegister", "Network request failed", t)
+                }
+            })
+    }
 
     //문의사항 완료
     private fun adminRegisterComplete(bid: Int) {
