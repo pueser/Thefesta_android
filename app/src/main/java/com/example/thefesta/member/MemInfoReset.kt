@@ -236,6 +236,7 @@ class MemInfoReset : Fragment() {
             }
         }
 
+
         memInfoResetButton.setOnClickListener {
 
             Log.d("FragmentMemInfoReset", "$nickname : $password")
@@ -244,6 +245,7 @@ class MemInfoReset : Fragment() {
             var originalPass = originalPasswordEditText.text.toString()
             var password = passwordEditText.text.toString()
             var passwordRe = passwordReEditText.text.toString()
+            var mDto = MemberDTO(id, nickname, password)
 
             if (nickname != "") {
 
@@ -332,18 +334,18 @@ class MemInfoReset : Fragment() {
                     }
                 }
             }
-                Log.d("FragmentMemInfoReset", "$nickname :after: $password")
-                memInfoReset(mDto)
             }
 
             if (password == "") {
                 memInfo?.let {
                     password = it.password.toString()
+                    val mDto = MemberDTO(id, nickname, password)
+                    Log.d("FragmentMemInfoReset", "여기? $mDto")
+                    memInfoReset(mDto)
                 }
             }
 
-            val mDto = MemberDTO(id, nickname, password)
-
+            mDto = MemberDTO(id, nickname, password)
             Log.d("FragmentMemInfoReset", "$nickname :after: $password")
             memInfoReset(mDto)
         }

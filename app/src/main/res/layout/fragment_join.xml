@@ -71,7 +71,7 @@
         <TextView
             android:id="@+id/joinNicknameError"
             android:layout_width="wrap_content"
-            android:layout_height="40px"
+            android:layout_height="45px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -105,7 +105,7 @@
         <TextView
             android:id="@+id/joinVerificationCodeError"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="55px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -120,7 +120,7 @@
         <TextView
             android:id="@+id/joinPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="55px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
@@ -135,7 +135,7 @@
         <TextView
             android:id="@+id/joinRePasswordError"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="55px"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:paddingTop="3dp" />
