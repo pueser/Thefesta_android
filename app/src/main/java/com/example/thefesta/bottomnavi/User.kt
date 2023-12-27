@@ -25,7 +25,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.example.thefesta.MainActivity
 import com.example.thefesta.R
-import com.example.thefesta.databinding.FragmentMyPageBinding
 import com.example.thefesta.databinding.FragmentUserBinding
 import com.example.thefesta.festival.FestivalLikeList
 import com.example.thefesta.member.MemInfoReset
