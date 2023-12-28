@@ -36,6 +36,7 @@ class FestivalList : Fragment() {
         FestivalClient.retrofit.create(IFestivalService::class.java)
     private val customAdapter = FestivalCustomAdapter()
     private lateinit var paginationLayout: LinearLayout
+    private var keyString: String? = null
     private var page = 1
     private var total = 1
     private var isLoading = false
@@ -83,15 +84,6 @@ class FestivalList : Fragment() {
                 loadPage(page - 1)
             }
         }
-
-        // 임시 좋아요 리스트
-        binding.likeList.setOnClickListener {
-            val festivalLikeListFragment = FestivalLikeList.newInstance()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, festivalLikeListFragment)
-                .addToBackStack(null)
-                .commit()
-        }
     }
 
     private fun initSearchView() {
@@ -103,8 +95,9 @@ class FestivalList : Fragment() {
                     Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.d("searchValue", "query: $query")
+                    keyString = query
                     page = 1
-                    fetchData(page, query)
+                    fetchData(page, keyString)
                 }
                 return false
             }
