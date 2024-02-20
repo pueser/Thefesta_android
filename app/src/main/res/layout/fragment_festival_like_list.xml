@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".festival.FestivalLikeList"
-    android:layout_marginTop="60dp"
-    android:layout_marginBottom="60dp"
+    android:layout_marginTop="80dp"
+    android:layout_marginBottom="100dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:background="#fff">
@@ -70,8 +70,8 @@
             android:id="@+id/likeListEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="200dp"
-            android:paddingBottom="200dp"
+            android:paddingTop="220dp"
+            android:paddingBottom="220dp"
             android:gravity="center"
             android:text="좋아요를 누른 축제가 없습니다."
             android:visibility="gone"/>
@@ -80,8 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:paddingBottom="20dp">
+            android:layout_marginTop="15dp">
             <android.widget.Button
                 android:id="@+id/likeListAllCheckBtn"
                 android:layout_width="70dp"

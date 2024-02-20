@@ -72,7 +72,7 @@ class Scheduler : Fragment() {
         webSet!!.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         webSet!!.setDomStorageEnabled(true); // 로컬저장소 허용 여부
         webView!!.webViewClient = WebViewClient()
-        webView!!.loadUrl("http://192.168.4.15:9090/Scheduler/")
+        webView!!.loadUrl("http://192.168.4.16:9090/Scheduler/")
         webView!!.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
