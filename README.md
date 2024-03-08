@@ -4,4 +4,4 @@
 ## 역할
 - **황혜진(관리자)**
   
-components 경로 : BreadcrumbsThefesta_react/thefesta/src/admin/
+Fragment 경로 : Thefesta_android/app/src/main/java/com/example/thefesta/admin/adminfesta/admin/
